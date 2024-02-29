@@ -22,11 +22,11 @@ Welcome to the Complaint Management System (CMS) frontend repository. This syste
 
 To run the CMS frontend locally, follow these steps:
 
-1. Clone the repository: `git clone https://github.com/your-username/complaint-management-frontend.git`
+1. Clone the repository: `git clone https://github.com/CometComplain/frontend`
 2. Install dependencies: `npm install`
-3. Start the development server: `npm start`
-4. The frontend will be available at `http://localhost:3000`.
-
+3. Build the Project: `npm run buid`
+4. The static build files will be generated in the `dist` directory.
+5. serve the static files using any server like `serve` or `http-server` or `nodejs` etc.
 ## Configuration
 
 Before running the frontend, make sure to configure the API [backend of this project](https://github.com/CometComplain/backend) endpoint in the `.env` file:
