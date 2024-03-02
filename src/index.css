@@ -1,0 +1,28 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: 1.3rem;
+    font-family: sans-serif;
+    background-color: lightsalmon;
+}
+
+.content {
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 75vh;
+}
+
+.header {
+    height: 5vh;
+}
+
+.footer {
+    height: 15vh;
+}

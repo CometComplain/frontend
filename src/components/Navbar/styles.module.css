@@ -1,0 +1,56 @@
+.navbar {
+    width: 100%;
+    height: min-content;
+    position: sticky;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5rem 2rem .5rem 2rem;
+}
+
+
+.navbar__ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    gap: 3rem;
+}
+
+.navbar__ul li {
+    padding: .1rem;
+}
+
+.active {
+    background-color: green;
+    border-radius: .3rem;
+    color: black !important;
+}
+.inactive {
+    background-color: transparent;
+    color: white !important;
+}
+.link {
+    text-decoration: none;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: .3rem;
+    transition: all .5s ease;
+
+}
+.navbar__logo {
+    /*background-color: pink;*/
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+}
+
+.login__options__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10rem;
+}
