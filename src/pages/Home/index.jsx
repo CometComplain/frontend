@@ -2,9 +2,8 @@ import {useRef} from 'react';
 import HomeCss from './styles.module.css';
 
 const Index = () => {
-    const divref = useRef();
     return (
-        <div ref={divref} className='content'>
+        <div className='content'>
             Home
         </div>
     );

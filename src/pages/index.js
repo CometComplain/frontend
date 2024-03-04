@@ -1,7 +1,9 @@
-import Home from "./Home/index.jsx";
-import About from "./About/index.jsx";
-import Contact from "./Contact/index.jsx";
-import Error from "./Error/index.jsx";
-import Login from "./Login/index.jsx";
+import Home from "./Home";
+import About from "./About";
+import Contact from "./Contact";
+import Error from "./Error";
+import Login from "./Login";
+import LoginError from "./LoginError";
+import Logout from "./Logout";
 
-export {Home, About, Contact, Error, Login };
+export {Home, About, Contact, Error, Login, LoginError, Logout };
