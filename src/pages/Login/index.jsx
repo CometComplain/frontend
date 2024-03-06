@@ -1,7 +1,7 @@
 import {useGoogleLogin} from '@react-oauth/google';
 import {authenticate} from '@api/authenticate.js';
 import {useNavigate} from "react-router-dom";
-import {useUser} from "@/contexts/UserContextProvider.js";
+import {useUser} from "@/contexts/UserContextProvider.jsx";
 import axios from "axios";
 import {googleStuff, pages} from "@/constants.js";
 import googleImage from "@/assets/google.png";
@@ -17,16 +17,18 @@ const Login = () => {
         const user = codeResponse;
         if (user) {
             try {
-                const responce = await axios.get(`${googleStuff.detailsUrl}${user.access_token}`, {
+                console.log('getting data from google')
+                const response = await axios.get(`${googleStuff.detailsUrl}${user.access_token}`, {
                     headers: {
                         Authorization: `Bearer ${user.access_token}`, Accept: 'application/json'
                     }
                 })
-                setUser(responce.data);
+                console.log('got details')
+                setUser(response.data);
 
             } catch (error) {
                 if (axios.isAxiosError(error)) {
-                    navigate(pages.loginError, {state: {error}})
+                    navigate(`${pages.loginError}/?message=Google not responded`, {state: {error, message:'Google not responded'}})
                 }
                 console.log('failed to contact with server');
             }
@@ -35,8 +37,10 @@ const Login = () => {
         }
     }
 
+    // navigate(pages.loginError, {state: {error}}
     const login = useGoogleLogin({
-        onSuccess: handleLogin, onError: (error) => navigate(pages.loginError, {state: {error}}),
+        onSuccess: handleLogin,
+        onError: (error) => console.log(error),
     });
 
 

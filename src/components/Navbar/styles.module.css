@@ -1,22 +1,26 @@
 .navbar {
-    width: 100%;
-    height: min-content;
     position: sticky;
-    top: 0;
-    left: 0;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    padding: .5rem 2rem .5rem 2rem;
+    align-items: stretch;
+    padding: .1em .5em .1em .5em;
+    flex-wrap: nowrap;
 }
 
 
 .navbar__ul {
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-end;
     align-items: center;
     list-style: none;
-    gap: 3rem;
+    width: 100%;
+
+}
+
+.login_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .navbar__ul li {
@@ -38,19 +42,102 @@
     font-size: 1.2rem;
     font-weight: bold;
     padding: .3rem;
-    transition: all .5s ease;
 
+    transition: all .5s ease;
+}
+
+.logout {
+    text-decoration: none;
+    background-color: red;
+    border-radius: .3rem;
+    padding: .2rem;
+    transition: all .5s ease;
 }
 .navbar__logo {
-    /*background-color: pink;*/
     font-size: 1.5rem;
     font-weight: bold;
     color: white;
 }
 
 .login__options__container {
+
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 10rem;
+
+}
+
+.menu_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 100%;
+    text-align: center;
+}
+
+.li {}
+
+@media (min-width: 768px) {
+    .navbar {
+        padding: .5em 1em;
+    }
+
+    .menu_icon {
+        display: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    .li:nth-last-of-type(1) {
+        margin-left: 10rem;
+    }
+}
+
+
+@media (max-width: 767px) {
+    .navbar__logo{
+        display: none;
+    }
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        padding: .5em;
+    }
+    .menu_wrapper {
+        flex-direction: column;
+    }
+    .navbar__ul {
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0;
+        margin: 0;
+    }
+
+    .menu_icon {
+
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+    .navbar__ul:active {
+        display: block;
+    }
+
+    .link {
+        display: block;
+        padding: .5em 0;
+        width: 100%;
+        text-decoration: none;
+        font-size: 1.2rem;
+        font-weight: bold;
+        transition: all .5s ease;
+        background-color: green;
+        border-radius: .3rem;
+        color: black !important;
+    }
+    .link:hover {
+        background-color: aliceblue;
+        border-radius: .3rem;
+        color: black !important;
+    }
 }

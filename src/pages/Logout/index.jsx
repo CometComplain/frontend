@@ -1,9 +1,10 @@
 import React, {useEffect} from 'react';
 import styles from './styles.module.css';
 import {googleLogout} from "@react-oauth/google";
+import {NotInUseDecorator} from "@/utils/notInUseFunctions.js";
 
 
-const Logout = () => {
+const Logout = NotInUseDecorator(() => {
     useEffect(() => {
         googleLogout();
     }, []);
@@ -13,6 +14,6 @@ const Logout = () => {
             <h1>Logging out...</h1>
         </div>
     );
-};
+});
 
 export default Logout;

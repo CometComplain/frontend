@@ -1,12 +1,12 @@
 import './App.css'
 import {Route, RouterProvider, createBrowserRouter, createRoutesFromElements} from "react-router-dom";
-import {Home, About, Contact, Error, Login, LoginError, Logout} from "@pages/";
-import {useState} from "react";
-import IndexLayout from "./Layouts/IndexLayout.jsx";
-import {UserContextProvider} from "./contexts/UserContextProvider.js";
+import {Home, About, Contact, Error, Login, LoginError, Logout, Dashboard, AccessForbidden} from "@pages/";
+import {IndexLayout, UserLayout} from "./Layouts";
+import {UserContextProvider, useUser} from "./contexts/UserContextProvider.jsx";
 import {Headers, UserTypes} from './constants.js';
 
-const router = createBrowserRouter(
+
+const routes = createBrowserRouter(
     createRoutesFromElements(
         <Route path="/" element={<IndexLayout/>}>
             <Route index element={<Home/>}/>
@@ -14,24 +14,23 @@ const router = createBrowserRouter(
             <Route path="contact" element={<Contact/>}/>
             <Route path="login" element={<Login/>}/>
             <Route path="login-error" element={<LoginError/>}/>
-            <Route path="logout" element={<Logout/>}/>
+            {/*<Route path="logout" element={<Logout/>}/>*/}
+            <Route path='access-forbidden' element={<AccessForbidden/>} />
             <Route path="*" element={<Error/>}/>
+            <Route path='user/' element={<UserLayout/>}>
+                <Route index element={<Dashboard />}/>
+                {/*<Route path='complaint' element={<Error/>} />*/}
+                <Route path='' element={<AccessForbidden/>} />
+            </Route>
         </Route>
     )
 )
 
 const App = () => {
-    const [user, setUser] = useState(
-        // {
-        //     [Headers.UserUName]: '',
-        //     [Headers.UserType]: UserTypes.Complainant,
-        // }
-        null
-    );
-
+    // const {user} = useUser();
     return (
-        <UserContextProvider value={{user, setUser}}>
-            <RouterProvider router={router}/>
+        <UserContextProvider>
+            <RouterProvider router={routes}/>
         </UserContextProvider>
     )
 }

@@ -1,7 +1,7 @@
 import {useRef} from 'react';
 import HomeCss from './styles.module.css';
 
-const Index = () => {
+const Home = () => {
     return (
         <div className='content'>
             Home
@@ -9,6 +9,4 @@ const Index = () => {
     );
 };
 
-export default Index;
-
-
+export default Home;

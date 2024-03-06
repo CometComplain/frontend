@@ -18,7 +18,7 @@ export const googleStuff = {
 
 export const pages = {
     login:'/login',
-    dashboard:'/dashboard',
+    dashboard:'/user',
     error:'/error',
     loginError:'/login-error',
     verify:'/verify',
@@ -30,4 +30,5 @@ export const pages = {
     admin:'/admin',
     adminError:'/admin-error',
     adminSuccess:'/admin-success',
+    access_forbidden:'/access-forbidden'
 }
