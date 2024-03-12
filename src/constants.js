@@ -16,9 +16,12 @@ export const googleStuff = {
     detailsUrl:'https://www.googleapis.com/oauth2/v1/userinfo?access_token=',
 }
 
+export const complaintTypes = ["Mess", "Electrical", "Plumbing", "IT", "Academics", "Others"];
+
 export const pages = {
     login:'/login',
     dashboard:'/user',
+    registerComplaint:'/user/complaint-register',
     error:'/error',
     loginError:'/login-error',
     verify:'/verify',
@@ -31,4 +34,10 @@ export const pages = {
     adminError:'/admin-error',
     adminSuccess:'/admin-success',
     access_forbidden:'/access-forbidden'
+}
+
+export const apiRoutes = {
+    registerComplaint:'/api/complaints/register',
+    getComplaints:'/api/complaints',
+    uploadProof:'/api/upload',
 }

@@ -1,13 +1,28 @@
 import Navbar from "../components/Navbar";
 import {Outlet} from "react-router-dom";
-import Footer from "../components/Footer";
+import ComplaintButton from "@components/ComplaintButton";
 
-const IndexLayout = () => {
+const unAuLinks = [{
+    name: 'Home', path: '/'
+}];
+const auLinks = [{
+    name: 'Home', path: '/'
+}, {
+    name: 'Dashboard', path: '/user'
+}];
+
+const homeSubs = [
+    {name: 'About', path: '/#about'},
+    {name: 'Contact', path: '/#contact'}
+];
+
+const IndexLayout = ({children}) => {
     return (
         <>
-            <Navbar/>
-            <Outlet/>
-            <Footer/>
+            <Navbar auLinks={auLinks} unAuLinks={unAuLinks} subs={{
+                'Home': homeSubs
+            }}/>
+            {children}
         </>
     );
 };

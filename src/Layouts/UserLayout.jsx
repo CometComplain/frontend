@@ -4,13 +4,13 @@ import { pages } from '@/constants';
 import { useEffect } from "react";
 
 const UserLayout = () => {
-    const { user } = useUser();
+    const { userG } = useUser();
     const navigate = useNavigate();
 
-    console.log('in dashboard');
+    // console.log('in dashboard');
 
     useEffect(() => {
-        if (!user) {
+        if (!userG) {
             navigate(pages.access_forbidden, { state: { reason: 'user not logged in' } });
         }
     }, []);

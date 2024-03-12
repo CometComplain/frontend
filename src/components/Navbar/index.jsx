@@ -3,69 +3,87 @@ import styles from './styles.module.css';
 import {NavLink, useNavigate} from "react-router-dom";
 import {googleLogout} from "@react-oauth/google";
 import {useUser} from "@/contexts/UserContextProvider";
+import {useLogout} from "@/utils/index.js";
 
-const Index = () => {
-    const {user, setUser} = useUser();
+const Navbar = ({auLinks = [], unAuLinks = [], subs = {}}) => {
+    const {userG, setUserG} = useUser();
     const navigate = useNavigate();
     const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State to manage dropdown visibility
     const ulRef = useRef(null);
+
     const toggleDropdown = () => {
         setIsDropdownOpen((prev) => {
-            ulRef.current.style.display = prev ? 'none' : "flex";
-            return !prev;
+            const newState = !prev;
+            if (newState) {
+                ulRef.current.style.display = "flex";
+            } else {
+                ulRef.current.style.display = "";
+            }
+            return newState;
         });
     };
 
-    const unAuLinks = [{
-        name: 'Home', path: '/'
-    }, {
-        name: 'About', path: '/about'
-    }, {
-        name: 'Contact', path: '/contact'
-    }];
-    const auLinks = [{
-        name: 'Home', path: '/'
-    }, {
-        name: 'About', path: '/about'
-    }, {
-        name: 'Contact', path: '/contact'
-    }, {
-        name: 'Dashboard', path: '/dashboard'
-    }];
+    // const unAuLinks = [{
+    //     name: 'Home', path: '/'
+    // }];
+    // const auLinks = [{
+    //     name: 'Home', path: '/'
+    // }, {
+    //     name: 'Dashboard', path: '/user'
+    // }];
 
 
-    const checkedLinks = user ? auLinks : unAuLinks;
+    const checkedLinks = userG ? auLinks : unAuLinks;
     const activeCheck = (isActive = null, customStyle) => {
         return `${isActive ? styles.active : styles.inactive} ${customStyle}`;
     };
+
     const logout = () => {
-        console.log('Logging out');
-        setUser(null);
-        googleLogout();
+        setUserG(null);
+        useLogout();
         navigate('/');
     }
+
+    // const homeSubs = [
+    //     {name: 'About', path: '/#about'},
+    //     {name: 'Contact', path: '/#contact'}
+    // ];
     return (
         <>
-            <div> {user?.name} </div>
             <nav className={`${styles.navbar} header`}>
-                <div className={styles.navbar__logo}>
-                    logo
-                </div>
-                <div className={styles.menu_wrapper}>
-                <span className={styles.menu_icon} onClick={toggleDropdown}>
+                <div className={styles.logo_menu_wrapper}>
+                    <div className={styles.navbar__logo}>
+                        logo
+                    </div>
+                    <span className={styles.menu_icon} onClick={toggleDropdown}>
                     {isDropdownOpen ? '✖' : '☰'}
                 </span>
+                </div>
+                <div className={styles.menu_wrapper}>
                     <ul className={`${styles.navbar__ul}`} ref={ulRef}>
                         {checkedLinks.map((link, index) => (
+                            <>
                             <li className={styles.li} key={index}>
                                 <NavLink to={link.path}
                                          className={({isActive}) => activeCheck(isActive, styles.link)}>{link.name}</NavLink>
                             </li>
+                            {
+                                subs[link.name] && (
+                                    subs[link.name].map((sub, indexThis) => (
+                                        <li className={styles.li} key={`${index}-${indexThis}`}>
+                                            <a href={sub.path}
+                                                     className={styles.link}>{sub.name}</a>
+                                        </li>
+                                    ))
+                                )
+                            }
+                            </>
                         ))}
                         <li className={styles.li}>
-                            {!user && <NavLink to="/login"
+                            {!userG && <NavLink to="/login"
                                                className={({isActive}) => activeCheck(isActive, styles.link)}>Login</NavLink>}
-                            {user && <button className={`${styles.logout} ${styles.link}`} onClick={logout}>Logout</button>}
+                            {userG &&
+                                <button className={`${styles.logout} ${styles.link}`} onClick={logout}>Logout</button>}
                         </li>
                     </ul>
                 </div>
@@ -74,7 +92,7 @@ const Index = () => {
     );
 };
 
-export default Index;
+export default Navbar;
 
 
 

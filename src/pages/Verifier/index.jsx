@@ -1,12 +1,12 @@
 import React from 'react';
 import styles from './styles.module.css';
 
-const AccessForbidden = () => {
+const Verifier = () => {
     return (
         <div className="content">
-          403 AccessForbidden
+          Verifier
         </div>
     );
 };
 
-export default AccessForbidden;
+export default Verifier;

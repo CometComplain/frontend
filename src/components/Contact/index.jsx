@@ -1,9 +1,9 @@
 import {} from 'react';
-import ContactCss from './styles.module.css';
+import styles from './styles.module.css';
 
 const Index = () => {
     return (
-        <div className='content'>
+        <div id="contact" className={styles.contact}>
             Contact
         </div>
     );

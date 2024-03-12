@@ -3,7 +3,7 @@ import styles from './styles.module.css';
 
 const Index = () => {
     return (
-        <div className='content'>
+        <div id='about' className={styles.about} >
             About
         </div>
     );

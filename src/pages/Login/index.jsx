@@ -6,54 +6,70 @@ import axios from "axios";
 import {googleStuff, pages} from "@/constants.js";
 import googleImage from "@/assets/google.png";
 import styles from './styles.module.css';
+import {useEffect} from "react";
 
 const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
+const useNavigateFromLogin = (navigate, jwt) => {
+
+    useEffect(() => {
+        if (jwt)
+            navigate(pages.dashboard);
+    }, [jwt]);
+}
+
 const Login = () => {
-    const {setUser} = useUser();
+    const {jwt, setJwt} = useUser();
     const navigate = useNavigate();
 
-    const handleLogin = async (codeResponse) => {
-        const user = codeResponse;
-        if (user) {
-            try {
-                console.log('getting data from google')
-                const response = await axios.get(`${googleStuff.detailsUrl}${user.access_token}`, {
-                    headers: {
-                        Authorization: `Bearer ${user.access_token}`, Accept: 'application/json'
-                    }
-                })
-                console.log('got details')
-                setUser(response.data);
+    useNavigateFromLogin(navigate, jwt);
 
-            } catch (error) {
-                if (axios.isAxiosError(error)) {
-                    navigate(`${pages.loginError}/?message=Google not responded`, {state: {error, message:'Google not responded'}})
-                }
-                console.log('failed to contact with server');
-            }
-            await authenticate(codeResponse.access_token);
-            navigate(pages.dashboard);
-        }
+    //  response structure
+    // {
+    //     "access_token": "string",
+    //     "expires_in": number,
+    //     "id_token": "string",
+    //     "scope": "string",
+    //     "token_type": "string",
+    // }
+    const handleLogin = (codeResponse) => {
+        if (codeResponse)
+            setJwt(codeResponse.access_token);
     }
 
-    // navigate(pages.loginError, {state: {error}}
     const login = useGoogleLogin({
         onSuccess: handleLogin,
         onError: (error) => console.log(error),
     });
 
 
-    // log out function to log the user out of google and set the profile array to null
     return (
-        <div className='content'>
-            <h1>Login</h1>
-            <button className={styles.google_signin} onClick={login}>
+        <div style={{
+            width:'100%',
+            height:'100vh',
+            display:'flex',
+            justifyContent:'center',
+            alignItems:'center',
+            gap:'2rem',
+        }}>
+            <div style={{
+                height:'100%',
+                display:'flex',
+                flexDirection:"column",
+                justifyContent:'center',
+                alignItems:'center',
+            }}>
+                <h1>Login</h1>
+                <button className={styles.google_signin} onClick={login}>
                 <span className={styles.icon}>
-                    <img className={styles.google__image} src={googleImage}/>
+                    <img className={styles.google__image} src={googleImage} alt='G'/>
                 </span>
-                <span className={styles.text}>Sign in with Google</span>
-            </button>
+                    <span className={styles.text}>Sign in with Google</span>
+                </button>
+            </div>
+            <div>
+                some card for design
+            </div>
         </div>
     );
 };
