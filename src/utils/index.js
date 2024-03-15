@@ -1,6 +1,6 @@
 import {useState} from "react";
 import axios, {AxiosError} from "axios";
-import {apiRoutes, googleStuff} from "@/constants.js";
+import {apiRoutes, customAxios, googleStuff} from "@/constants.js";
 import {googleLogout} from "@react-oauth/google";
 
 export const NotInUseDecorator = (func) => {
@@ -36,50 +36,13 @@ export const useLocalStorage = (key, initialValue) => {
     return [storedValue, setValue];
 }
 
-export const useLogout = () => {
-    googleLogout();
-    localStorage.removeItem('jwt');
-}
-
-export const getDataFromGoogle = async (jwt) => {
-    try {
-        // console.log('getting data from google')
-        const response = await axios.get(`${googleStuff.detailsUrl}${jwt}`, {
-            headers: {
-                Authorization: `Bearer ${jwt}`, Accept: 'application/json'
-            }
-        })
-        // console.log('got details', response.data);
-        return response.data;
-    } catch (error) {
-        if (axios.isAxiosError(error)) {
-            throw error;
-        }
-    }
-}
 
 export const getDate = () => {
     return new Date().toISOString().split('T')[0];
 }
 
-export const getComplaints = async (jwt, type) => {
-    const apiUrl = `${apiRoutes.getComplaints}/?type=${type}`;
 
-    const config = {
-        headers: {
-            Authorization: `Bearer ${jwt}`
-        }
-    };
 
-    try {
-        const response = await axios.get(apiUrl, config);
-        return response.data;
-    } catch (error) {
-        if(axios.isAxiosError(error)) {
-            if(error.response?.status === 401) {
-                useLogout();
-            }
-        }
-    }
-    throw new Error('Error fetching complaints');
+export const useLogout = () => {
+    window.open(`${apiRoutes.backendUrl}/auth/logout`, "_self");
 }

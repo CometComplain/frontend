@@ -3,27 +3,27 @@ import styles from './styles.module.css';
 import form from "@pages/Form/index.jsx";
 import axios from "axios";
 import Navbar from "@components/Navbar/index.jsx";
-import {links} from "@pages/Dashboard";
 import {useMutation} from "@tanstack/react-query";
 import {getDate} from "@/utils/index.js";
-import {apiRoutes, complaintTypes} from '@/constants'
+import {apiRoutes, auLinks, complaintTypes, customAxios} from '@/constants'
 
 
 const sendData = async (complaintData) => {
     if (!complaintData) throw new Error('No data');
 
-    const response = await axios.post(apiRoutes.registerComplaint, complaintData);
+    const response = await customAxios.post(apiRoutes.registerComplaint, complaintData);
     if (response.data['status'] === 'error') {
         throw new Error('bad request');
     }
     return response.data
 }
+
 const sendFile = async (file) => {
     if (!file) throw new Error('No file');
 
     const fileForm = new FormData();
     fileForm.append('file', file);
-    const response = await axios.post(apiRoutes.uploadProof, fileForm, {
+    const response = await customAxios.post(apiRoutes.uploadProof, fileForm, {
         'Content-Type': 'multipart/form-data',
     });
     if (response.data['status'] === 'error') {
@@ -55,6 +55,7 @@ const ComplaintForm = () => {
             console.log('unable to send file')
         }
     })
+
     const dataMutation = useMutation({
         mutationFn: sendData,
         onSuccess: (responseData) => {
@@ -103,7 +104,6 @@ const ComplaintForm = () => {
 
     const formContent = (
         <>
-            <Navbar auLinks={links} unAuLinks={links}/>
             <div>
                 {popup && (<div className={styles.popup}>
                     {popUpContent}

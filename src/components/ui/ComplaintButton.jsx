@@ -17,8 +17,8 @@ const styles = {
 }
 
 const ComplaintButton = () => {
-    const {userG} = useUser();
-    let display = userG ? "flex" : "none";
+    const {user} = useUser();
+    let display = user ? "flex" : "none";
     const url = window.location.href;
     if( url.includes('/complaint-register')) display = "none";
     const naviagte = useNavigate();

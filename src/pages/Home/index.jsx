@@ -7,17 +7,17 @@ import {useUser} from "@/contexts/UserContextProvider.jsx";
 import {pages} from "@/constants.js";
 
 const ActualHome = () => {
-    const {userG} = useUser();
+    const { user} = useUser();
     const navigate = useNavigate();
     return (
         <div className={styles.home}>
             <h1>
-                { userG && `welcome ${userG.name}` || 'login to continue' }
+                { user && `welcome ${user.name}` || 'login to continue' }
             </h1>
             <h2>wanna register a complaint</h2>
             <button onClick={
                 () => {
-                    if (userG) {
+                    if (user) {
                         navigate(pages.registerComplaint);
                     } else {
                         navigate(pages.login);
@@ -29,6 +29,17 @@ const ActualHome = () => {
 }
 
 const Home = () => {
+    const url = window.location.href;
+    const section = url.split('#')[1];
+
+    useEffect(() => {
+        if (section) {
+            const element = document.getElementById(section);
+            if (element) {
+                element.scrollIntoView({behavior: "smooth"});
+            }
+        }
+    }, [url]);
     return (
         <div className='content'>
             <ActualHome />

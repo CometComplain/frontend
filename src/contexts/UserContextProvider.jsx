@@ -1,40 +1,36 @@
 import {createContext, useContext, useEffect, useState} from "react";
-import {getDataFromGoogle, useLocalStorage} from "@/utils";
-import {pages} from "@/constants.js";
-import {authenticate} from "@api/authenticate.js";
 import {useNavigate} from "react-router-dom";
 import {googleLogout} from "@react-oauth/google";
 import axios from "axios";
+import {apiRoutes, customAxios} from "@/constants.js";
+
 
 export const userContext = createContext({
     user: null,
-    setUser: () => {
-    }
+    setUser: () => {},
 });
 
 export const UserContextProvider = ({children}) => {
-    const [userG, setUserG] = useState(
-        // {
-        //     [Headers.UserUName]: '',
-        //     [Headers.UserType]: UserTypes.Complainant,
-        // }
+
+    const [user, setUser] = useState(
         null
     );
-    const [jwt, setJwt] = useLocalStorage('jwt', '');
+    // const [jwt, setJwt] = useLocalStorage('jwt', '');
     useEffect(() => {
-        if (jwt) {
-            getDataFromGoogle(jwt).then(async (userData) => {
-                setUserG(userData);
-                await authenticate(jwt);
-            }, (error) => {
-                if (axios.isAxiosError(error) && error.response.status === 401) {
-                    setJwt('');
-                }
-            });
+        const getUser = async () => {
+            const response = await customAxios.get(`/backend/api/v1/auth/login/success`);
+            setUser(response.data);
         }
-    }, [jwt]);
+        try {
+            getUser();
+        }
+        catch (error) {
+            console.error(error);
+            setUser(null);
+        }
+    }, []);
     return (
-        <userContext.Provider value={{userG, setUserG, jwt, setJwt}}>
+        <userContext.Provider value={{user, setUser}}>
             {children}
         </userContext.Provider>
     )
