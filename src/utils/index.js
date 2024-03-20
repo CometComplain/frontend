@@ -44,5 +44,5 @@ export const getDate = () => {
 
 
 export const useLogout = () => {
-    window.open(`${apiRoutes.backendUrl}/auth/logout`, "_self");
+    window.open(`${apiRoutes.backendUrl}/grievance/auth/logout`, "_self");
 }

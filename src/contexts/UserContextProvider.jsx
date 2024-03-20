@@ -1,40 +1,54 @@
-import {createContext, useContext, useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
-import {googleLogout} from "@react-oauth/google";
+import { createContext, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { googleLogout } from "@react-oauth/google";
 import axios from "axios";
-import {apiRoutes, customAxios} from "@/constants.js";
-
+import { apiRoutes, customAxios, UserTypes } from "@/constants.js";
 
 export const userContext = createContext({
     user: null,
     setUser: () => {},
 });
 
-export const UserContextProvider = ({children}) => {
+const useChangeUser = (user, setRequested) => {
+    useEffect(() => {
+        if(user) {
+            setRequested(true);
+        }
+    }, [user, setRequested]);
+}
 
-    const [user, setUser] = useState(
-        null
-    );
-    // const [jwt, setJwt] = useLocalStorage('jwt', '');
+export const UserContextProvider = ({ children }) => {
+    const [user, setUser] = useState(null);
+    const [requested, setRequested] = useState(false);
+
     useEffect(() => {
         const getUser = async () => {
-            const response = await customAxios.get(`/backend/api/v1/auth/login/success`);
-            setUser(response.data);
-        }
+            const response = await customAxios.get(apiRoutes.getUser);
+            console.log(response.data);
+            setUser(prev => ({...response.data, role: UserTypes.Technician}));
+        };
         try {
             getUser();
-        }
-        catch (error) {
+        } catch (error) {
+            if(axios.isAxiosError(error) && error.response.status === 401) {
+                setRequested(true);
+                setUser(null);
+            }
             console.error(error);
-            setUser(null);
+            // setUser({
+            //     role:UserTypes.Technician,
+            //     displayName: "sodi"
+            // })
         }
     }, []);
+
+    useChangeUser(user, setRequested);
+
     return (
-        <userContext.Provider value={{user, setUser}}>
+        <userContext.Provider value={{ user, setUser, requested }}>
             {children}
         </userContext.Provider>
-    )
+    );
 };
 
 export const useUser = () => useContext(userContext);
-

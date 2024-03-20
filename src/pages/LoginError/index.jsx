@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './styles.module.css';
-import {useLocation} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 
 const LoginError = () => {
     const location = useLocation();
@@ -8,9 +8,8 @@ const LoginError = () => {
     const message = queryParams.get('message');
     return (
         <div className="content">
-          LoginError {
-            message
-        }
+            LoginError { message }
+            <Link to={pages.login} > Login </Link>
         </div>
     );
 };

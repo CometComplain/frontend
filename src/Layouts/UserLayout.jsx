@@ -4,16 +4,19 @@ import { pages } from '@/constants';
 import { useEffect } from "react";
 
 const UserLayout = () => {
-    const { user } = useUser();
+    const { user, requested } = useUser();
     const navigate = useNavigate();
 
-    // console.log('in dashboard');
-
     useEffect(() => {
-        if (!user) {
-            navigate(pages.access_forbidden, { state: { reason: 'user not logged in' } });
+        if (requested && !user) {
+            alert(requested);
+            navigate(pages.access_forbidden, {state: {reason: 'user not logged in'}});
         }
-    }, []);
+    }, [requested]);
+
+    if (!requested) {
+        return <div>Loading...</div>;
+    }
 
     return (
         <div>
