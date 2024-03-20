@@ -26,7 +26,7 @@ const Dashboard = () => {
     );
     useEffect(() => {
         if(!user) {
-            // navigate('/login/', {replace: true});
+            navigate('/login/', {replace: true});
         }
     }, []);
     console.log(user);

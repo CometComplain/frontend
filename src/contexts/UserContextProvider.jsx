@@ -25,7 +25,7 @@ export const UserContextProvider = ({ children }) => {
         const getUser = async () => {
             const response = await customAxios.get(apiRoutes.getUser);
             console.log(response.data);
-            setUser(prev => ({...response.data, role: UserTypes.Technician}));
+            setUser(prev => ({...response.data, role: UserTypes.Complainant}));
         };
         try {
             getUser();
