@@ -2,6 +2,7 @@ import {useState} from "react";
 import axios, {AxiosError} from "axios";
 import {apiRoutes, customAxios, googleStuff} from "@/constants.js";
 import {googleLogout} from "@react-oauth/google";
+import {toast} from "sonner";
 
 export const NotInUseDecorator = (func) => {
     return (...args) => {
@@ -10,6 +11,11 @@ export const NotInUseDecorator = (func) => {
     }
 }
 
+export const onError = (error) => {
+    if(error.response && error.response.data && error.response.data.message) toast.success(error.response.data.message);
+
+    else toast.error('Got a unknown error');
+}
 
 // custom hook to use local storage
 export const useLocalStorage = (key, initialValue) => {
@@ -18,11 +24,10 @@ export const useLocalStorage = (key, initialValue) => {
             const item = window.localStorage.getItem(key);
             return item ? JSON.parse(item) : initialValue;
         } catch (error) {
-            console.error(error);
+            // console.error(error);
             return initialValue;
         }
     });
-    // console.log('Google Jwt : ', storedValue);
     const setValue = value => {
         try {
             const valueToStore = value instanceof Function ? value(storedValue) : value;

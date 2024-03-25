@@ -15,28 +15,22 @@ const ActualHome = () => {
             <h1>
                 { user && `welcome ${user.displayName}` || 'login to continue' }
             </h1>
+            <br/>
+            <br/>
             <h2>wanna register a complaint</h2>
             <button onClick={
-                () => {
-                    if (user) {
-                        navigate(pages.registerComplaint);
-                    } else {
-                        navigate(pages.login);
+                    () => {
+                        if (user) {
+                            navigate(pages.registerComplaint);
+                        } else {
+                            navigate(pages.login);
+                        }
                     }
                 }
-            }>Raise a complaint</button>
-            {/*<Complaint complaint={{*/}
-            {/*    id: '123',*/}
-            {/*    title: 'Water Problem',*/}
-            {/*    description: 'Water is not comingWater is not comingWater is not comingWater is not comingWater is not comingWater is not coming',*/}
-            {/*    status: 'pending',*/}
-            {/*}} >*/}
-            {/*    <button className={complaintStyles.button} onClick={(event)=>{*/}
-            {/*        event.preventDefault();*/}
-            {/*        event.stopPropagation();*/}
-            {/*        alert('clicked');*/}
-            {/*    }}>Click It</button>*/}
-            {/*</Complaint>*/}
+                className={styles.complaintButton}
+            >Raise a complaint</button>
+
+            {user && JSON.stringify(user)}
         </div>
     );
 }

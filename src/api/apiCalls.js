@@ -26,19 +26,38 @@ export const getComplaints = async (params = [], subUrl = '') => await coverRequ
     return response.data;
 }, [params, subUrl]);
 
-export const deleteComplaint = async (id) => await coverRequests(async () => {
-    const response = await customAxios.delete(apiRoutes.getComplaintWithId, {data: {id}});
+export const getComplaintWithId = async (id) => {
+    const response = await customAxios.get(`${apiRoutes.getComplaintWithId}/${id}`);
+    return response.data
+}
+
+export const deleteComplaint = async (id) => await coverRequests(async (id) => {
+    const response = await customAxios.delete(apiRoutes.deleteComplaint, {data: {complaintId: id}});
     return response.data;
 }, [id]);
-
 
 export const verifyComplaint = async (id) => await coverRequests(async () => {
-    const response = await customAxios.post(apiRoutes.verifyComplaint, {id});
+    const response = await customAxios.post(apiRoutes.verifyComplaint, {complaintId: id});
     return response.data;
 }, [id]);
 
+export const rejectComplaint = async (id) => await coverRequests(
+    async () => {
+        const response = await customAxios.post(apiRoutes.rejectComplaint);
+        return response.data;
+    }
+)
 
 export const acceptComplaint = async (id) => await coverRequests(async () => {
-    const response = await customAxios.post(apiRoutes.acceptComplaint, {id});
+    const response = await customAxios.post(apiRoutes.acceptComplaint, {
+        complaintId: id,
+    });
     return response.data;
 }, [id]);
+
+export const solveComplaint = async (id) => await coverRequests(async (id) => {
+    const response = await customAxios.post(apiRoutes.solveComplaint, {
+        complaintId: id,
+    });
+    return response.data;
+},[id]);

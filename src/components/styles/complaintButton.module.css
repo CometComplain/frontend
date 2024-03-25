@@ -1,0 +1,17 @@
+.complaintButton {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    opacity: 0.9;
+    font-size: xx-large !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    padding: 1rem;
+    border-radius: .5rem;
+    z-index: 1000;
+}

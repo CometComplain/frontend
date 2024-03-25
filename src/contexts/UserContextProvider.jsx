@@ -9,13 +9,6 @@ export const userContext = createContext({
     setUser: () => {},
 });
 
-const useChangeUser = (user, setRequested) => {
-    useEffect(() => {
-        if(user) {
-            setRequested(true);
-        }
-    }, [user, setRequested]);
-}
 
 export const UserContextProvider = ({ children }) => {
     const [user, setUser] = useState(null);
@@ -23,27 +16,27 @@ export const UserContextProvider = ({ children }) => {
 
     useEffect(() => {
         const getUser = async () => {
-            const response = await customAxios.get(apiRoutes.getUser);
-            console.log(response.data);
-            setUser(prev => ({...response.data, role: UserTypes.Complainant}));
-        };
-        try {
-            getUser();
-        } catch (error) {
-            if(axios.isAxiosError(error) && error.response.status === 401) {
+            try {
+                const response = await customAxios.get(apiRoutes.getUser);
+                setUser(prev => ({...response.data}));
+            } catch (error) {
+                if(axios.isAxiosError(error) && error.response.status === 401) {
+                    setUser(null);
+                }
+                console.error(error);
+            } finally {
                 setRequested(true);
-                setUser(null);
             }
-            console.error(error);
-            // setUser({
-            //     role:UserTypes.Technician,
-            //     displayName: "sodi"
-            // })
-        }
+        };
+
+        getUser();
     }, []);
 
-    useChangeUser(user, setRequested);
 
+    // useEffect(() => {
+    //     setRequested(true)
+    //
+    // }, [user])
     return (
         <userContext.Provider value={{ user, setUser, requested }}>
             {children}

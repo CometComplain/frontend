@@ -1,39 +1,36 @@
-import {} from 'react';
 import {useUser} from "@/contexts/UserContextProvider.jsx";
 import {useNavigate} from "react-router-dom";
+import styles from '../styles/complaintButton.module.css';
+import pen from "@/assets/pen.svg";
 
-const styles = {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    position: "fixed",
-    bottom: '2rem',
-    padding: '1rem',
-    borderRadius: '.5rem',
-    right: '2rem',
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    zIndex: 1000,
-    cursor:'pointer'
-}
 
 const ComplaintButton = () => {
     const {user} = useUser();
-    let display = user ? "flex" : "none";
+    // let display = user ? "flex" : "none";
+    let display = "flex";
     const url = window.location.href;
     if( url.includes('/complaint-register')) display = "none";
     const naviagte = useNavigate();
-    const newStyles = {...styles, display};
     return (
-        <div style={newStyles}>
+        <div style={{
+            display
+        }}
+             className={styles.complaintButton}
+        >
             <button style={{
                 backgroundColor:'transparent',
                 border:'none',
                 outline:'none',
+                color:'var(--quinary-color)',
             }}
             onClick={() => {
-                naviagte('/user/complaint-register');
+                naviagte();
             }}
             >Complain</button>
+            &nbsp;
+            <img src={pen} style={{
+                fill: "red",
+            }} />
         </div>
     );
 }

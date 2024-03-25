@@ -2,7 +2,7 @@ import styles from './styles.module.css';
 import {useNavigate} from "react-router-dom";
 import UserDetails from "./UserDetails";
 import Complainant from "./Complainant";
-import Technitian from "./Technitian";
+import Technician from "./Technician.jsx";
 import Verifier from "./Verifier";
 import { useUser } from '@/contexts/UserContextProvider';
 import { UserTypes } from '@/constants';
@@ -10,7 +10,7 @@ import {useEffect} from "react";
 
 const dashBoardMaps = {
     [UserTypes.Complainant] : Complainant,
-    [UserTypes.Technician]: Technitian,
+    [UserTypes.Technician]: Technician,
     [UserTypes.Verifier] : Verifier,
 }
 
@@ -29,7 +29,7 @@ const Dashboard = () => {
             navigate('/login/', {replace: true});
         }
     }, []);
-    console.log(user);
+
     const Component = dashBoardMaps[user?.role || UserTypes.Complainant];
     return (
         <>

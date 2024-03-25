@@ -1,11 +1,12 @@
-import {useEffect, useState} from 'react';
 import styles from './styles.module.css';
 import form from "@pages/Form/index.jsx";
-import axios from "axios";
-import Navbar from "@components/Navbar/index.jsx";
 import {useMutation} from "@tanstack/react-query";
-import {getDate} from "@/utils/index.js";
-import {apiRoutes, auLinks, complaintTypes, customAxios} from '@/constants'
+import {getDate, onError} from "@/utils/index.js";
+import {apiRoutes, buildingsMap, complaintTypes, customAxios, pages} from '@/constants'
+import {toast} from "sonner";
+import {useUser} from "@/contexts/UserContextProvider.jsx";
+import {useNavigate} from "react-router-dom";
+import {useEffect} from "react";
 
 
 const sendData = async (complaintData) => {
@@ -32,82 +33,93 @@ const sendFile = async (file) => {
     return response.data
 }
 
-const useFormSubmit = (data, dataMutation, setPopup) => {
-    useEffect(() => {
-        if (data[0]) {
-            setPopup(true);
-            dataMutation.mutate(data[0]);
-        }
-    }, [data]);
+// const useFormSubmit = (data, dataMutation) => {
+//     useEffect(() => {
+//         if (data[0]) {
+//             dataMutation.mutate(data[0]);
+//         }
+//     }, [data]);
+//
+// }
 
+const formatAsaRequest = (complaint) => {
+    return {
+        complaint,
+    }
 }
 
-const ComplaintForm = () => {
-    const [popup, setPopup] = useState(false);
-    const [data, setData] = useState([]);
+const getFormData = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        /*
+            complaint from frontend format = {
+                title: String,
+                description: String,
+                mobile: String,
+                compliantType: String,
+                location: {
+                    buildingName: String,
+                    roomNo: String,
+                    floorNo: String,
+                },
+            }
+        */
+        const formData = {
+            title: form.title.value,
+            compliantType: complaintTypes[form.type.value],
+            location: {
+                buildingName: form.building.value,
+                roomNo: form.roomNo.value || '',
+                floorNo: form.floorNo.value || '',
+            },
+            description: form.description.value,
+        };
+        const file = form.proof.files[0];
+        return [formData, file];
+    }
 
+
+const ComplaintForm = () => {
+    const navigate = useNavigate();
+    const {user} = useUser();
+    if(user === null) {
+        return <></>
+    }
+    // useEffect(() => {
+    //     if(user === null)
+    //         navigate(pages.login);
+    // }, []);
     const fileMutation = useMutation({
         mutationFn: sendFile,
         onSuccess: (responseData) => {
-            console.log('Registered complaint successfully');
+            toast.success('Registered complaint successfully');
         },
-        onError: () => {
-            console.log('unable to send file')
-        }
+        onError
     })
 
     const dataMutation = useMutation({
         mutationFn: sendData,
-        onSuccess: (responseData) => {
-            fileMutation.mutate(data[1]);
-        },
-        onError: () => {
-            console.log('unable to send data')
-        }
+        // onSuccess: (responseData) => {
+        //     // toast.success('Registered complaint without file successfully');
+        // },
+        onError
     });
 
-    const setFormData = (e) => {
-        e.preventDefault();
-        const form = e.target;
-        const formData = {
-            name: form.name.value,
-            stu_id: form.stu_id.value,
-            mail: form.mail.value,
-            date: form.date.value,
-            type: form.type.value,
-            // location: form.location.value,
-            description: form.description.value,
-        };
-        const file = form.proof.files[0];
-        setData([formData, file]);
-    }
 
-    useFormSubmit(data, dataMutation, setPopup);
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        setFormData(event);
+        const [formData, file] = getFormData(event);
+        const complaint = formatAsaRequest(formData);
+        await dataMutation.mutateAsync(complaint);
+        await fileMutation.mutateAsync(file);
     };
 
     const today = getDate();
 
-    const popUpContent = (
-        <>
-            <div className={styles.popup_items_container}>
-                <button className={styles.popup_remove} onClick={() => setPopup(false)}>X</button>
-                {fileMutation.isSuccess && <div>Complaint registered successfully</div>}
-                {(dataMutation.isError || fileMutation.isError) && <div>Error in registering Complaint</div>}
-                {(dataMutation.isPending || fileMutation.isPending) && <div>Registering Complaint ... </div>}
-            </div>
-        </>
-    );
-
-    const formContent = (
+    return (
         <>
             <div>
-                {popup && (<div className={styles.popup}>
-                    {popUpContent}
-                </div>)}
                 <div className={styles.wrapper}>
                     <div style={{
                         textAlign: 'center', fontSize: "xx-large", fontWeight: "bolder"
@@ -120,15 +132,18 @@ const ComplaintForm = () => {
                                 <p>Personal information</p>
                                 <div className={styles.inputs_label_wrapper}>
                                     <label htmlFor="name">Name: </label>
-                                    <input type="text" name="name"/>
+                                    <input type="text" name="name" disabled value={user.displayName}/>
 
-                                    <label htmlFor="stu_id" style={{
+                                    <label htmlFor="roll" style={{
                                         marginRight: "3.4rem"
-                                    }}>Student Id:</label>
-                                    <input type="text" name="stu_id"/>
+                                    }}>Roll No :</label>
+                                    <input type="text" name="roll" disabled value={user.rollNo}/>
 
                                     <label htmlFor="mail">Email: </label>
-                                    <input type="email" name="mail"/>
+                                    <input type="email" name="mail" disabled value={user.email}/>
+
+                                    <label htmlFor='mobile'>Mobile No: </label>
+                                    <div ><input type='tel' pattern='(+91)? [0-9]{10}'/></div>
                                 </div>
                             </div>
                             <br/>
@@ -142,35 +157,45 @@ const ComplaintForm = () => {
                                 <div><label htmlFor="type">Complaint Type:</label></div>
                                 <div>
                                     <select name="type">
-                                        {complaintTypes.map((type, index) => {
-                                            return <option key={index} value={type}>{type}</option>
+                                        {Object.keys(complaintTypes).map((type, index) => {
+                                            return <option key={index} value={type}>{type.charAt(0).toUpperCase() + type.slice(1)}</option>
                                         })}
                                     </select>
                                 </div>
 
+                                <div><label htmlFor='title' >Title : </label></div>
+                                <div><input type='text' name='title'/></div>
+
                                 <div><label htmlFor="location">Location: </label></div>
-                                <div>location to be made decision</div>
+                                <div>
+                                    <select name="building" required>
+                                        {
+                                            Object.keys(buildingsMap).map((building, index) => (
+                                                <option key={index} value={buildingsMap[building]}>{building}</option>
+                                            ))
+                                        }
+                                    </select>
+                                    <input type="text" name="roomNo" placeholder="Room No"/>
+                                    <input type="text" name="floorNo" placeholder="Floor No"/>
+                                </div>
 
                                 <div><label htmlFor="description">Description: </label></div>
                                 <div><textarea name="description" cols={60} rows={10}></textarea></div>
 
                                 <div><label htmlFor="proof">Proof: </label></div>
-                                <div><input type="file" name='proof'/></div>
+                                <div><input type="file" name='proof' accept='.jpg, .jpeg, .png, .gif, .bmp, .webp, .mp4, .webm, .ogg, .ogv'/></div>
                             </div>
                         </div>
                         <div className={styles.buttons_wrapper}>
                             <button type="submit">Submit</button>
                             <button type="reset">Reset</button>
                         </div>
-                    </form>
+                        </form>
 
                 </div>
             </div>
-
         </>
-    );
-
-    return formContent
+    )
 };
 
 export default ComplaintForm;

@@ -8,6 +8,22 @@ export const UserTypes = {
     Admin: 3,
 };
 
+export const statusMap = {
+    Pending: 0,
+    Verified: 1,
+    Accepted: 2,
+    Solved: 3,
+    Rejected: 4,
+};
+
+export const reverseStatusMap = {
+    0: "Pending",
+    1: "Verified",
+    2: "Accepted",
+    3: "Solved",
+    4: "Rejected",
+}
+
 export const Headers = {
     UserType: "type",
     UserFirstName: "f_name",
@@ -19,14 +35,37 @@ export const googleStuff = {
     detailsUrl: "https://www.googleapis.com/oauth2/v1/userinfo?access_token=",
 };
 
-export const complaintTypes = [
-    "Mess",
-    "Electrical",
-    "Plumbing",
-    "IT",
-    "Academics",
-    "Others",
-];
+export const complaintTypes =  {
+    mess: 0,
+    electrical: 1,
+    plumbing: 2,
+    it: 3,
+    academics: 4,
+    others: 5,
+};
+
+export const buildingsMap = {
+    "Mess": 0,
+    "Admin Block": 1,
+    "Academic Block": 2,
+    "new Academic Block": 3,
+    "Meenachil Hostel": 4,
+    "Sahayadri Hostel": 5,
+    "Manimala Hostel": 6,
+    "Annaimudi Hostel": 7,
+    "Anna residency": 8,
+}
+export const reverseBuildingsMap = {
+    [0]: "Mess",
+    [1]: "Admin Block",
+    [2]: "Academic Block",
+    [3]: "new Academic Block",
+    [4]: "Meenachil Hostel",
+    [5]: "Sahayadri Hostel",
+    [6]: "Manimala Hostel",
+    [7]: "Annaimudi Hostel",
+    [8]: "Anna residency",
+}
 
 export const pages = {
     login: "/login",
@@ -51,10 +90,13 @@ const backendUrl = "http://localhost:5000";
 export const apiRoutes = {
     registerComplaint: "/api/grievance/register",
     getComplaints: "/api/grievance/complaints",
-    getComplaintWithId: "/api/complaint",
-    uploadProof: "/api/upload",
-    verifyComplaint: "/api/complaints/verify",
-    acceptComplaint: "/api/complaints/accept",
+    getComplaintWithId: "/api/grievance/complaintWithId",
+    deleteComplaint: "/api/grievance/delete",
+    uploadProof: "/api/grievance/upload",
+    verifyComplaint: "/api/grievance/verify",
+    rejectComplaint: "/api/grievance/reject",
+    acceptComplaint: "/api/grievance/accept",
+    solveComplaint: "/api/grievance/solve",
     getUser: "/api/grievance/auth/pinguser",
     backendUrl,
     // login:`${backendUrl}/api/v1/auth/google`,
@@ -86,7 +128,8 @@ export const unAuLinks = [
         path: "/",
     },
 ];
-export const auLinks = [
+
+const verTechLinks = [
     {
         name: "Home",
         path: "/",
@@ -95,11 +138,19 @@ export const auLinks = [
         name: "Dashboard",
         path: "/user/dashboard",
     },
+];
+
+const userSpecificLinks = [
     {
         name: "Register Complaint",
         path: "/user/complaint-register",
     },
-];
+]
+export const auLinks = {
+    [UserTypes.Complainant]: [...verTechLinks, ...userSpecificLinks],
+    [UserTypes.Verifier]: verTechLinks,
+    [UserTypes.Technician]: verTechLinks,
+};
 
 export const subs = {
     Home: [
