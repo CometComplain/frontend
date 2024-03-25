@@ -5,8 +5,7 @@ import About from "@components/About";
 import {useLocation, useNavigate} from "react-router-dom";
 import {useUser} from "@/contexts/UserContextProvider.jsx";
 import {pages} from "@/constants.js";
-import Complaint from "@components/Complaints/Complaint.jsx";
-import complaintStyles from "@components/styles/complaint.module.css";
+
 const ActualHome = () => {
     const { user} = useUser();
     const navigate = useNavigate();

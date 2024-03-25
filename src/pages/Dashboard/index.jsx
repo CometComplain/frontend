@@ -1,11 +1,11 @@
 import styles from './styles.module.css';
 import {useNavigate} from "react-router-dom";
-import UserDetails from "./UserDetails";
-import Complainant from "./Complainant";
+import UserDetails from "./UserDetails.jsx";
+import Complainant from "./Complainant.jsx";
 import Technician from "./Technician.jsx";
-import Verifier from "./Verifier";
-import { useUser } from '@/contexts/UserContextProvider';
-import { UserTypes } from '@/constants';
+import Verifier from "./Verifier.jsx";
+import { useUser } from '@/contexts/UserContextProvider.jsx';
+import { UserTypes } from '@/constants.js';
 import {useEffect} from "react";
 
 const dashBoardMaps = {
