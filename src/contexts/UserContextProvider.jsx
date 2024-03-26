@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { apiRoutes, customAxios, UserTypes } from "@/constants.js";
+import {toast} from "sonner";
 
 export const userContext = createContext({
     user: null,
@@ -22,7 +23,7 @@ export const UserContextProvider = ({ children }) => {
                 if(axios.isAxiosError(error) && error.response.status === 401) {
                     setUser(null);
                 }
-                console.error(error);
+                // toast.error(error.response.data.message);
             } finally {
                 setRequested(true);
             }

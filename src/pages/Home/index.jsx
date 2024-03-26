@@ -29,7 +29,7 @@ const ActualHome = () => {
                 className={styles.complaintButton}
             >Raise a complaint</button>
 
-            {user && JSON.stringify(user)}
+            {/*{user && JSON.stringify(user)}*/}
         </div>
     );
 }

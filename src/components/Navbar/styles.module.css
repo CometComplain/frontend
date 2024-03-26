@@ -1,5 +1,6 @@
 .navbar {
     position: sticky;
+    top: 0;
     display: flex;
     justify-content: space-between;
     align-items: stretch;
@@ -28,7 +29,8 @@
 }
 
 .active {
-    background-color: var(--tertiary-color);
+    /*background-color: var(--tertiary-color);*/
+    background-color: var(--blue-color);
     border-radius: .3rem;
     color: var(--quinary-color) !important;
 }
@@ -41,26 +43,31 @@
     text-decoration: none;
     color: var(--quinary-color);
     font-size: 1.2rem;
-    font-weight: bold;
+    /*font-weight: bold;*/
     padding: .3rem;
     transition: all .5s ease;
 }
 
 .link:hover {
-    background-color: var(--tertiary-color);
+    /*background-color: var(--tertiary-color);*/
+    background-color: var(--dark-blue-color);
     border-radius: .3rem;
     color: black !important;
 }
 .logout {
     text-decoration: none;
-    background-color: red;
     border-radius: .3rem;
-    padding: .2rem;
+    background-color: var(--contrast-color);
+    /*padding: .2rem;*/
     transition: all .5s ease;
+}
+.logout:hover {
+    background-color: var(--contrast-color-dark) !important;
+    color: white !important;
 }
 .navbar__logo {
     font-size: 1.5rem;
-    font-weight: bold;
+    /*font-weight: bold;*/
     color: black;
 }
 
@@ -147,7 +154,7 @@
         width: 100%;
         text-decoration: none;
         font-size: 1.2rem;
-        font-weight: bold;
+        /*font-weight: bold;*/
         transition: all .5s ease;
         background-color: var(--quaternary-color);
         border-radius: .3rem;

@@ -114,8 +114,6 @@ const Complainant = () => {
             {solvedComplaintsQuery.isError && solvedComplaintsQuery.error.message}
             {solvedComplaintsQuery.isSuccess && complaintsDiv()}
             {solvedComplaintsQuery.isFetching && 'Fetching more complaints...'} */}
-            <div></div>
-            <CompliantDetail />
         </div>
     );
 }

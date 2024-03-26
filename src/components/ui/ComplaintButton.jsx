@@ -2,6 +2,7 @@ import {useUser} from "@/contexts/UserContextProvider.jsx";
 import {useNavigate} from "react-router-dom";
 import styles from '../styles/complaintButton.module.css';
 import pen from "@/assets/pen.svg";
+import {pages} from "@/constants.js";
 
 
 const ComplaintButton = () => {
@@ -22,15 +23,14 @@ const ComplaintButton = () => {
                 border:'none',
                 outline:'none',
                 color:'var(--quinary-color)',
+                fontSize: '1.1rem',
             }}
             onClick={() => {
-                naviagte();
+                naviagte(pages.registerComplaint);
             }}
             >Complain</button>
             &nbsp;
-            <img src={pen} style={{
-                fill: "red",
-            }} />
+            <img src={pen} />
         </div>
     );
 }
