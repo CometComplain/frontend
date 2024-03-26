@@ -31,17 +31,12 @@ export const Headers = {
     UserUName: "u_name",
 };
 
-export const googleStuff = {
-    detailsUrl: "https://www.googleapis.com/oauth2/v1/userinfo?access_token=",
-};
-
 export const complaintTypes =  {
-    mess: 0,
-    electrical: 1,
-    plumbing: 2,
-    it: 3,
-    academics: 4,
-    others: 5,
+    electrical: 0,
+    plumbing: 1,
+    IT: 2,
+    academics: 3,
+    others: 4,
 };
 
 export const buildingsMap = {
@@ -83,9 +78,10 @@ export const pages = {
     adminError: "/admin-error",
     adminSuccess: "/admin-success",
     access_forbidden: "/access-forbidden",
+    complaint: "/user/complaint",
 };
 
-const backendUrl = "http://localhost:5000";
+export const backendUrl = "http://172.16.207.102:5000";
 
 export const apiRoutes = {
     registerComplaint: "/api/grievance/register",

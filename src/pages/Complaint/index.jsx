@@ -46,8 +46,8 @@ const Verifier = ({complaint}) => {
     }
     return (
         <div>
-            <button onClick={handleVerify}>Verify</button>
-            <button onClick={handleReject}>Reject</button>
+            { complaint.status < statusMap.Verified && <button onClick={handleVerify}>Verify</button> }
+            { complaint.status < statusMap.Verified && <button onClick={handleReject}>Reject</button> }
         </div>
     );
 }
@@ -58,7 +58,7 @@ const Technician = ({complaint}) => {
         mutationFn: acceptComplaint,
         onSuccess: () => {
             toast.success('Complaint Accepted Successfully');
-            navigate(pages.dashboard);
+            location.reload();
         },
         onError,
     });
@@ -72,10 +72,10 @@ const Technician = ({complaint}) => {
     });
 
     const handleAccept = async () => {
-        await handleAccept.mutateAsync(complaint.complaintId);
+        await acceptMutation.mutateAsync(complaint.complaintId);
     }
     const handleSolve = async () => {
-        await handleSolve.mutateAsync(complaint.complaintId);
+        await solveMutation.mutateAsync(complaint.complaintId);
     }
     return (
         <div>

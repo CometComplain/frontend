@@ -1,17 +1,38 @@
 .wrapper {
-    height: 95vh;
-    background-color: red;
+    min-height: 85vh;
+    background-color: var(--quinary-color);
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2rem;
+    gap: 1rem;
 }
 
 .form {
     display: flex;
-    align-items: flex-start;
+    align-items: stretch;
     flex-direction: column;
     padding: 1rem 1rem 1rem 3rem;
     height: 90%;
-    background-color: teal;
+    width: 100%;
+    border-radius: .5rem;
     gap: 3rem;
+    label {
+        font-size: 1rem;
+    }
+    input {
+        padding: 1rem !important;
+        border-radius: .3rem;
+        font-size: 1.2rem;
+        border: none;
+        outline: none;
+        background-color: transparent;
+    }
 }
+
+
 
 .form_sub_wrapper {
     display: flex;
@@ -29,6 +50,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.required {
+    color: darkred;
+    margin-left: 3px;
 }
 
 .popup_remove {
@@ -58,20 +84,59 @@
     }
 }
 
+.items {
+    padding-left: .7rem;
+    padding-top: .3rem;
+    display: flex;
+    flex-direction: column;
+}
+
 .inputs_label_wrapper {
+    background-color: var(--tertiary-color);
+    border-radius: .3rem;
     display: grid;
     gap: 1rem;
-    grid-template-columns: repeat(2, max-content);
-    grid-template-rows: repeat(auto-fill, max-content);
-    align-items: center;
-
+    grid-template-columns: repeat(2, 1fr);
+    padding: 1rem 1rem 2rem;
+    width: fit-content;
+    place-items: center;
     input {
-        width: 100%; /* Adjust as needed */
         height: 1.7rem;
         padding: .2rem;
         border-radius: 5px;
         border: solid 1px white;
     }
+    select {
+        width: max-content;
+        height: 1.7rem;
+        padding: .2rem;
+        border-radius: .3rem;
+        border: solid 1px white;
+    }
+}
+
+.location_wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.location {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+
+    div {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+textarea {
+    padding: .5rem;
+    border-radius: .3rem;
+    border: none;
+    outline: none;
+    resize: none;
 }
 
 .date_wrapper {

@@ -73,7 +73,6 @@ const Verifier = () => {
             {isError &&
                 error.message}
             {isSuccess && complaintsDiv()}
-            {isFetching && "Fetching more complaints..."}
         </div>
     );
 };

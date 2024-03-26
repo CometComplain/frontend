@@ -111,7 +111,6 @@ const Technician = () => {
             {technicianPendingComplaintQuery.isError &&
                 technicianPendingComplaintQuery.error.message}
             {technicianPendingComplaintQuery.isSuccess && complaintsDiv()}
-            {technicianPendingComplaintQuery.isFetching && "Fetching more complaints..."}
         </div>
     );
 };

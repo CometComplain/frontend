@@ -22,15 +22,14 @@ const ComplaintButton = () => {
                 border:'none',
                 outline:'none',
                 color:'var(--quinary-color)',
+                fontSize: '1.1rem',
             }}
             onClick={() => {
                 naviagte();
             }}
             >Complain</button>
             &nbsp;
-            <img src={pen} style={{
-                fill: "red",
-            }} />
+            <img src={pen} />
         </div>
     );
 }

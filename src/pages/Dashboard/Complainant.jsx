@@ -92,7 +92,6 @@ const Complainant = () => {
             {solvedComplaintsQuery.isLoading && 'fetching complaints...'}
             {solvedComplaintsQuery.isError && solvedComplaintsQuery.error.message}
             {solvedComplaintsQuery.isSuccess && complaintsDiv()}
-            {solvedComplaintsQuery.isFetching && 'Fetching more complaints...'}
         </div>
     );
 }
