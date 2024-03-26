@@ -4,9 +4,10 @@ import {useMutation} from "@tanstack/react-query";
 import {getDate, onError} from "@/utils/index.js";
 import {apiRoutes, buildingsMap, complaintTypes, customAxios, pages} from '@/constants'
 import {toast} from "sonner";
+import {Toast} from 'primereact/toast';
 import {useUser} from "@/contexts/UserContextProvider.jsx";
 import {useNavigate} from "react-router-dom";
-import {useEffect} from "react";
+import { FileUpload } from 'primereact/fileupload';
 
 
 const sendData = async (complaintData) => {
@@ -199,12 +200,9 @@ const ComplaintForm = () => {
 
                             </div>
                             <div>
-                                <div><label htmlFor="proof">Proof: <span className={styles.required}>*</span></label>
-                                </div>
-                                <div><input type="file" required name='proof'
-                                            accept='.jpg, .jpeg, .png, .gif, .bmp, .webp, .mp4, .webm, .ogg, .ogv'/>
-                                </div>
-                            </div>
+                                <label htmlFor='file'>Proof</label>
+                                <Toast ref={toast}></Toast>
+                                <FileUpload mode="basic" name="file" accept="image/*, video/*" auto chooseLabel="Browse" />                            </div>
                         </div>
                         <div className={styles.buttons_wrapper}>
                             <button type="submit">Submit</button>

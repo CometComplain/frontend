@@ -81,7 +81,7 @@ export const pages = {
     complaint: "/user/complaint",
 };
 
-export const backendUrl = "http://172.16.207.102:5000";
+export const backendUrl = "http://localhost:5000";
 
 export const apiRoutes = {
     registerComplaint: "/api/grievance/register",
