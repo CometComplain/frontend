@@ -6,6 +6,8 @@ import {handleScroll} from "@pages/Dashboard/utils.js";
 import {useState} from "react";
 import {toast} from "sonner";
 import {onError} from "@/utils/index.js";
+import CompliantCard from "@components/CompliantCard/CompliantCard";
+import CompliantDetail from "@pages/CompliantDetail/CompliantDetail";
 
 
 const subUrl = "complainant";
@@ -87,12 +89,33 @@ const Complainant = () => {
     }
     return (
 
-        <div className={styles.solved_complaints_wrapper}>
-            <h1>Complaints</h1>
-            {solvedComplaintsQuery.isLoading && 'fetching complaints...'}
+        <div className="m-5 border border-gray-300 rounded-lg shadow-xl ">
+            <div className="p-5 text-2xl font-semibold bg-gray-300">Compliants</div>
+            <div className="flex items-center gap-3 p-2 m-2 border border-gray-300 rounded shadow w-fit">
+            <label for="filter" className="text-base capitalize">filter</label>
+                <select id="filter" className="p-2 text-base border-2 border-black rounded" name="filter">
+                <option value="unsolved">unsolved complinats</option>
+                <option value="solved">solved complinats</option>
+                <option value="pending">pending complinats</option>
+                <option value="accepted">accepted complinats</option>
+                </select>
+            </div>
+            <CompliantCard />
+            <CompliantCard />
+            <CompliantCard />
+            <CompliantCard />
+            <CompliantCard />
+            <CompliantCard />
+            <CompliantCard />
+            <CompliantCard />
+            <CompliantCard />
+            <CompliantCard />
+            {/* {solvedComplaintsQuery.isLoading && 'fetching complaints...'}
             {solvedComplaintsQuery.isError && solvedComplaintsQuery.error.message}
             {solvedComplaintsQuery.isSuccess && complaintsDiv()}
-            {solvedComplaintsQuery.isFetching && 'Fetching more complaints...'}
+            {solvedComplaintsQuery.isFetching && 'Fetching more complaints...'} */}
+            <div></div>
+            <CompliantDetail />
         </div>
     );
 }

@@ -1,12 +1,13 @@
 import styles from './styles.module.css';
 import {useNavigate} from "react-router-dom";
-import UserDetails from "./UserDetails.jsx";
 import Complainant from "./Complainant.jsx";
 import Technician from "./Technician.jsx";
 import Verifier from "./Verifier.jsx";
-import { useUser } from '@/contexts/UserContextProvider.jsx';
-import { UserTypes } from '@/constants.js';
+import { useUser } from '@/contexts/UserContextProvider';
+import { UserTypes } from '@/constants';
 import {useEffect} from "react";
+import UserDetails from './UserDetails';
+import CompliantDetail from '@pages/CompliantDetail/CompliantDetail';
 
 const dashBoardMaps = {
     [UserTypes.Complainant] : Complainant,
@@ -19,11 +20,11 @@ const Dashboard = () => {
     const navigate = useNavigate();
     const { user, requested } = useUser();
 
-    if(!requested) return (
-        <div>
-            loading...
-        </div>
-    );
+        // if(!requested) return (
+        //     <div>
+        //         loading...
+        //     </div>
+        // );
     useEffect(() => {
         if(!user) {
             navigate('/login/', {replace: true});

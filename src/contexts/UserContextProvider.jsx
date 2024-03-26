@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { googleLogout } from "@react-oauth/google";
 import axios from "axios";
 import { apiRoutes, customAxios, UserTypes } from "@/constants.js";
 
