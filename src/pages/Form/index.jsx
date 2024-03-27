@@ -159,7 +159,7 @@ const ComplaintForm = () => {
                                         <select name="type">
                                             {Object.keys(complaintTypes).map((type, index) => {
                                                 return <option key={index}
-                                                               value={type}>{type.charAt(0).toUpperCase() + type.slice(1)}</option>
+                                                    value={type}>{type.charAt(0).toUpperCase() + type.slice(1)}</option>
                                             })}
                                         </select>
                                     </div>

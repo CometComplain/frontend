@@ -109,7 +109,6 @@ const Complainant = () => {
             <CompliantCard />
             <CompliantCard />
             <CompliantCard />
-            <CompliantCard />
             {/* {solvedComplaintsQuery.isLoading && 'fetching complaints...'}
             {solvedComplaintsQuery.isError && solvedComplaintsQuery.error.message}
             {solvedComplaintsQuery.isSuccess && complaintsDiv()}

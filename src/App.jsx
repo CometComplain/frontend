@@ -24,7 +24,7 @@ const routes = createBrowserRouter(
             }/>
             <Route path="login/" element={<Login/>}/>
             <Route path='access-forbidden/' element={<AccessForbidden/>}/>
-            <Route path="*/" element={<Error/>}/>
+            <Route path="/error" element={<Error/>}/>
             <Route path='user/' element={<UserLayout/>} >
                 <Route path='dashboard/' element={<Dashboard/>}/>
                 <Route path='complaint/:complaintId' element={<Complaint/>}/>
@@ -37,8 +37,8 @@ const routes = createBrowserRouter(
 
 const App = () => {
     return (
-      <>
-      <UserContextProvider>
+    <>
+    <UserContextProvider>
             <QueryClientProvider client={new QueryClient()}>
                 <Toaster richColors duration={2000} position='top-right' style={{
                     top:'5rem',
@@ -47,7 +47,7 @@ const App = () => {
                 {/*<ReactQueryDevtools/>*/}
             </QueryClientProvider>
         </UserContextProvider>
-      </>
+    </>
     )
 }
 

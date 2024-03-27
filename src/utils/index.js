@@ -1,10 +1,6 @@
 import {useState} from "react";
 import axios, {AxiosError} from "axios";
-<<<<<<< HEAD
-import {apiRoutes, customAxios, googleStuff} from "@/constants.js";
-=======
 import {apiRoutes, customAxios} from "@/constants.js";
->>>>>>> e6b99298738351282c1be1430f8780c2b7354f3a
 import {toast} from "sonner";
 
 export const NotInUseDecorator = (func) => {
