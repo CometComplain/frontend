@@ -7,6 +7,12 @@ export const UserTypes = {
     Technician: 2,
     Admin: 3,
 };
+export const reverseUserTypes = {
+    [0] : "Complainant",
+    [1] : "Verifier",
+    [2] : "Technician",
+    [3] : "Admin",
+};
 
 export const statusMap = {
     Pending: 0,
@@ -35,7 +41,7 @@ export const complaintTypes =  {
     electrical: 0,
     plumbing: 1,
     IT: 2,
-    others: 4,
+    others: 3,
 };
 
 export const reverseComplaintTypes =  {
@@ -165,7 +171,7 @@ export const subs = {
 export const timeGap = 150;
 
 export const statusStylesMap = {
-    [statusMap.Pending]: "rounded-xl px-3 bg-gray-100 text-amber-700",
+    [statusMap.Pending]: "rounded-xl px-3 bg-amber-100 text-amber-700",
     [statusMap.Verified]: "rounded-xl px-3 bg-orange-100 text-red-700",
     [statusMap.Accepted]: "rounded-xl px-3 bg-blue-200 text-blue-700",
     [statusMap.Solved]: "rounded-xl px-3 bg-green-200 text-black",

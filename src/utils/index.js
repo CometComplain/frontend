@@ -11,7 +11,7 @@ export const NotInUseDecorator = (func) => {
 }
 
 export const onError = (error) => {
-    if(error.response && error.response.data && error.response.data.message) toast.success(error.response.data.message);
+    if(error.response && error.response.data && error.response.data.message === 'Complaint already exists') toast.success(error.response.data.message);
 
     else toast.error('Got a unknown error');
 }
