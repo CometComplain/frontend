@@ -4,10 +4,8 @@ import {useMutation} from "@tanstack/react-query";
 import {getDate, onError} from "@/utils/index.js";
 import {apiRoutes, buildingsMap, complaintTypes, customAxios, pages} from '@/constants'
 import {toast} from "sonner";
-import {Toast} from 'primereact/toast';
 import {useUser} from "@/contexts/UserContextProvider.jsx";
 import {useNavigate} from "react-router-dom";
-import { FileUpload } from 'primereact/fileupload';
 
 
 const sendData = async (complaintData) => {
@@ -67,12 +65,13 @@ const getFormData = (e) => {
         */
         const formData = {
             title: form.title.value,
-            compliantType: complaintTypes[form.type.value],
+            complaintType: complaintTypes[form.type.value],
             location: {
                 buildingName: form.building.value,
                 roomNo: form.roomNo.value || '',
                 floorNo: form.floorNo.value || '',
             },
+            mobile: form.mobile.value,
             description: form.description.value,
         };
         const file = form.proof.files[0];
@@ -142,7 +141,7 @@ const ComplaintForm = () => {
                                     <div className={styles.items}>
                                         <label htmlFor='mobile'>Mobile No: <span
                                             className={styles.required}>*</span></label>
-                                        <div><input required type='tel' pattern='(+91)? [0-9]{10}'/></div>
+                                        <div><input required type='tel' pattern='[0-9]{10}' name='mobile'/></div>
                                     </div>
 
                                 </div>
@@ -201,8 +200,8 @@ const ComplaintForm = () => {
                             </div>
                             <div>
                                 <label htmlFor='file'>Proof</label>
-                                <Toast ref={toast}></Toast>
-                                <FileUpload mode="basic" name="file" accept="image/*, video/*" auto chooseLabel="Browse" />                            </div>
+                                <input type='file' name='proof' accept='image/*, video/*'/>
+                            </div>
                         </div>
                         <div className={styles.buttons_wrapper}>
                             <button type="submit">Submit</button>

@@ -2,30 +2,33 @@ import VerifierComplaint from "@components/Complaints/VerifierComplaint.jsx";
 import styles from "./styles.module.css";
 import {useInfiniteQuery, useMutation, useQueryClient} from "@tanstack/react-query";
 import {getComplaints, rejectComplaint, verifyComplaint} from "@/api/apiCalls.js";
-import {handleScroll} from "@pages/Dashboard/utils.js";
+import {handleScroll, RenderComplaints} from "@pages/Dashboard/utils.jsx";
 import {toast} from "sonner";
+import complaintStyle from "@components/styles/complaint.module.css";
 
 const subUrl = "verifier";
 
 const key = ["complaints", subUrl];
 const Verifier = () => {
     const queryClient = useQueryClient();
-    const complaintsDiv = () => (
+    const complaintsDiv = (renderableComplaints) => (
         <>
             <div
                 className={styles.solved_complaints}
                 onScroll={(event) => handleScroll(event, [technitianComplaintQuery])}
             >
-                {complaints.map((complaint) => {
-                    return (
-                        <VerifierComplaint
-                            complaint={complaint}
-                            verifyMutation={verifyMutation}
-                            rejectMutation={rejectMutation}
-                            key={complaint.id}
-                        />
-                    );
-                })}
+                <div className={complaintStyle.complaint} >
+                    <div>Sl No</div>
+                    <div>Complaint ID</div>
+                    <div>Created At</div>
+                    <div>Title</div>
+                    <div>Status</div>
+                    <div>Action</div>
+                </div>
+                <RenderComplaints renderableComplaints={renderableComplaints} Component={VerifierComplaint} props={{
+                    verifyMutation,
+                    rejectMutation,
+                }}/>
             </div>
         </>
     );
@@ -72,7 +75,7 @@ const Verifier = () => {
             {isLoading && "fetching complaints..."}
             {isError &&
                 error.message}
-            {isSuccess && complaintsDiv()}
+            {isSuccess && complaintsDiv(complaints)}
         </div>
     );
 };

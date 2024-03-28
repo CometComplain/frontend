@@ -1,23 +1,21 @@
 import {useEffect} from 'react';
 import styles from './styles.module.css';
-import Contact from "@components/Contact";
-import About from "@components/About";
+import Contact from "@components/Contact/contact.jsx";
+import About from "@components/About/about.jsx";
 import {useLocation, useNavigate} from "react-router-dom";
 import {useUser} from "@/contexts/UserContextProvider.jsx";
-import {pages} from "@/constants.js";
+import {pages, UserTypes} from "@/constants.js";
 
 const ActualHome = () => {
     const { user} = useUser();
     const navigate = useNavigate();
     return (
-        <div className={styles.home}>
-            <h1>
-                { user && `welcome ${user.displayName}` || 'login to continue' }
+        <div className={styles.home} id='home'>
+            <h1 className='text-4xl font-bold'>
+                { user && `welcome ${user.displayName}` || 'Login to register a complaint' }
             </h1>
-            <br/>
-            <br/>
-            <h2>wanna register a complaint</h2>
-            <button onClick={
+            { ((user && user.role === UserTypes.Complainant) || !user) && (
+                <button onClick={
                     () => {
                         if (user) {
                             navigate(pages.registerComplaint);
@@ -26,30 +24,24 @@ const ActualHome = () => {
                         }
                     }
                 }
-                className={styles.complaintButton}
-            >Raise a complaint</button>
-
-            {/*{user && JSON.stringify(user)}*/}
+                        className={styles.complaintButton}
+                >Raise a complaint</button>
+            )}
         </div>
     );
 }
 
 const Home = () => {
     const url = window.location.href;
-    const section = url.split('#')[1];
 
     useEffect(() => {
-        if (section) {
-            const element = document.getElementById(section);
-            if (element) {
-                element.scrollIntoView({behavior: "smooth"});
-            }
-        }
+        const section = url.split('#')[1];
+        const element = document.getElementById(section ? section : 'home');
+        element.scrollIntoView({behavior: "smooth"});
     }, [url]);
     return (
         <div className='content'>
             <ActualHome />
-            <Contact />
             <About />
         </div>
     );
