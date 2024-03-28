@@ -171,9 +171,9 @@ export const subs = {
 export const timeGap = 150;
 
 export const statusStylesMap = {
-    [statusMap.Pending]: "rounded-xl px-3 bg-amber-100 text-amber-700",
-    [statusMap.Verified]: "rounded-xl px-3 bg-orange-100 text-red-700",
-    [statusMap.Accepted]: "rounded-xl px-3 bg-blue-200 text-blue-700",
-    [statusMap.Solved]: "rounded-xl px-3 bg-green-200 text-black",
-    [statusMap.Rejected]: 'rounded-xl px-3 bg-red-200 text-gray-700',
+    [statusMap.Pending]: "rounded-md px-2 bg-amber-100 text-amber-700",
+    [statusMap.Verified]: "rounded-md px-2 bg-orange-100 text-red-700",
+    [statusMap.Accepted]: "rounded-md px-2 bg-blue-200 text-blue-700",
+    [statusMap.Solved]: "rounded-md px-2 bg-green-200 text-black",
+    [statusMap.Rejected]: 'rounded-md px-2 bg-red-200 text-gray-700',
 }

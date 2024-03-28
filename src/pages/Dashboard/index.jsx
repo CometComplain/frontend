@@ -7,11 +7,13 @@ import Verifier from "./Verifier.jsx";
 import { useUser } from '@/contexts/UserContextProvider.jsx';
 import { UserTypes } from '@/constants.js';
 import {useEffect} from "react";
+import Admin from "@pages/Dashboard/Admin.jsx";
 
 const dashBoardMaps = {
     [UserTypes.Complainant] : Complainant,
     [UserTypes.Technician]: Technician,
     [UserTypes.Verifier] : Verifier,
+    [UserTypes.Admin] : Admin,
 }
 
 

@@ -12,7 +12,7 @@ const ActualHome = () => {
     return (
         <div className={styles.home} id='home'>
             <h1 className='text-4xl font-bold'>
-                { user && `welcome ${user.displayName}` || 'Login to register a complaint' }
+                { user && `Welcome ${user.displayName}` || 'Login to register a complaint' }
             </h1>
             { ((user && user.role === UserTypes.Complainant) || !user) && (
                 <button onClick={

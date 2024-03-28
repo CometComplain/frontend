@@ -1,10 +1,16 @@
-const YourComponent = ({ attachmentUrl }) => {
+const firstRow = "text-base font-medium text-gray-600";
+const secondRow = "font-bold text-xl";
+const row = "flex flex-col gap-1";
+const col = "flex flex-col gap-5"
+
+
+const PreviewProof = ({ attachmentUrl }) => {
     return (
-        <div className="row">
-            <div className="firstRow">
-                Attachments
+        <>
+            <div className={`${firstRow} text-5xl`}>
+                Proof
             </div>
-            <div className={`${secondRow} text-blue-700`}>
+            <div className={`${secondRow} rounded-md text-blue-700 `}>
                 {attachmentUrl && (
                     <>
                         {attachmentUrl.endsWith('.mp4') ? (
@@ -13,15 +19,15 @@ const YourComponent = ({ attachmentUrl }) => {
                                 Your browser does not support the video tag.
                             </video>
                         ) : attachmentUrl.endsWith('.png') || attachmentUrl.endsWith('.jpg') || attachmentUrl.endsWith('.jpeg') ? (
-                            <img src={attachmentUrl} alt="Attachment" />
+                            <img src={attachmentUrl} alt="Attachment"/>
                         ) : (
                             <a href={attachmentUrl} download>Download Attachment</a>
                         )}
                     </>
                 )}
             </div>
-        </div>
+        </>
     );
 };
 
-export default YourComponent;
+export default PreviewProof;

@@ -22,6 +22,9 @@ import {
 import {useUser} from "@/contexts/UserContextProvider.jsx";
 import {toast} from "sonner";
 import {onError} from "@/utils/index.js";
+import googleImage from '@/assets/google.png';
+import PreviewProof from "@components/ui/PreviewProof.jsx";
+
 
 const Verifier = ({complaint}) => {
     const navigate = useNavigate();
@@ -93,11 +96,9 @@ const Complainant = ({complaint}) => {
     const handleDelete = async () => {
         await deleteMutation.mutateAsync(complaint.complaintId);
     }
-    return (<div className={`${styles.bottom_buttons_wrapper}`}>
-
-            {complaint.status !== statusMap.Solved &&
-                <button onClick={handleDelete} className={styles.delete}>Delete</button>}
-        </div>);
+    return complaint.status !== statusMap.Solved ? (<div className={`${styles.bottom_buttons_wrapper}`}>
+        <button onClick={handleDelete} className={styles.delete}>Delete</button>
+    </div>) : (<></>);
 }
 
 const userMap = {
@@ -109,8 +110,8 @@ const userMap = {
 const firstRow = "text-base font-medium text-gray-600";
 const secondRow = "font-bold text-xl";
 const row = "flex flex-col gap-1";
-const col = "flex flex-col gap-5"
-const attachmentUrl = "https://unsplash.com/photos/RKYPRNMCBsY/download?force=true"
+const col = "flex flex-col flex-wrap gap-5"
+const attachmentUrl = googleImage;
 
 
 const Complaint = () => {
@@ -140,7 +141,7 @@ const Complaint = () => {
                 <div className='w-full'>
                     <div className="flex flex-col gap-3 m-5 border border-gray-300 rounded-lg shadow-lg ">
                         <div className="p-5 text-2xl font-semibold bg-gray-300 ">Veiw Application Details</div>
-                        <div className="flex flex-row justify-between p-5">
+                        <div className="flex flex-row flex-wrap justify-between p-5 gap-5">
                             <div className={col}>
                                 <div className={row}>
                                     <div className={firstRow}>
@@ -250,14 +251,11 @@ const Complaint = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="px-5 pb-5">
-                            <div className={row}>
-                                <div className={firstRow}>
-                                    Attachments
-                                </div>
-                                <div className={`${secondRow} text-blue-700`}>
-                                    {attachmentUrl && (<a href={attachmentUrl} download>Download Attachment</a>)}
-                                </div>
+                        <div className="px-5 pb-5 flex justify-center" style={{
+                            width: '100%',
+                        }} >
+                            <div className={`${row} items-center`}>
+                                <PreviewProof attachmentUrl={attachmentUrl}/>
                             </div>
                         </div>
                     </div>
