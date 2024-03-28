@@ -8,7 +8,7 @@ const coverRequests = async (func, params) => {
     } catch (error) {
         if (axios.isAxiosError(error)) {
             if (error.response?.status === 401) {
-                useLogout();
+                // useLogout();
             }
         }
         console.log('got an error: ', error);

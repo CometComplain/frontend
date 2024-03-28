@@ -2,11 +2,11 @@ import Complaint from "./Complaint.jsx";
 import styles from '../styles/complaint.module.css'
 import {statusMap} from "@/constants.js";
 
-const TechnicianComplaint = ({complaint, acceptMutation, solvedMutation}) => {
+const TechnicianComplaint = ({complaint, acceptMutation, solvedMutation, index}) => {
 
     return (
         <>
-            <Complaint complaint={complaint}>
+            <Complaint complaint={complaint} index={index}>
                 {
                     complaint.status === statusMap.Verified && (<button className={styles.button} onClick={(event) => {
                         event.preventDefault();

@@ -31,17 +31,19 @@ export const Headers = {
     UserUName: "u_name",
 };
 
-export const googleStuff = {
-    detailsUrl: "https://www.googleapis.com/oauth2/v1/userinfo?access_token=",
+export const complaintTypes =  {
+    electrical: 0,
+    plumbing: 1,
+    IT: 2,
+    others: 4,
 };
 
-export const complaintTypes =  {
-    mess: 0,
-    electrical: 1,
-    plumbing: 2,
-    it: 3,
-    academics: 4,
-    others: 5,
+export const reverseComplaintTypes =  {
+    [0]: 'Electrical',
+    [1]: 'plumbing',
+    [2]: 'IT',
+    [3]: 'Academics',
+    [4]: 'Others',
 };
 
 export const buildingsMap = {
@@ -83,9 +85,10 @@ export const pages = {
     adminError: "/admin-error",
     adminSuccess: "/admin-success",
     access_forbidden: "/access-forbidden",
+    complaint: "/user/complaint",
 };
 
-const backendUrl = "http://localhost:5000";
+export const backendUrl = "http://localhost:5000";
 
 export const apiRoutes = {
     registerComplaint: "/api/grievance/register",
@@ -158,3 +161,13 @@ export const subs = {
         { name: "Contact", path: "/#contact" },
     ],
 };
+
+export const timeGap = 150;
+
+export const statusStylesMap = {
+    [statusMap.Pending]: "rounded-xl px-3 bg-gray-100 text-amber-700",
+    [statusMap.Verified]: "rounded-xl px-3 bg-orange-100 text-red-700",
+    [statusMap.Accepted]: "rounded-xl px-3 bg-blue-200 text-blue-700",
+    [statusMap.Solved]: "rounded-xl px-3 bg-green-200 text-black",
+    [statusMap.Rejected]: 'rounded-xl px-3 bg-red-200 text-gray-700',
+}

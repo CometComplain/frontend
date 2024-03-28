@@ -6,7 +6,6 @@ import {apiRoutes, buildingsMap, complaintTypes, customAxios, pages} from '@/con
 import {toast} from "sonner";
 import {useUser} from "@/contexts/UserContextProvider.jsx";
 import {useNavigate} from "react-router-dom";
-import {useEffect} from "react";
 
 
 const sendData = async (complaintData) => {
@@ -66,12 +65,13 @@ const getFormData = (e) => {
         */
         const formData = {
             title: form.title.value,
-            compliantType: complaintTypes[form.type.value],
+            complaintType: complaintTypes[form.type.value],
             location: {
                 buildingName: form.building.value,
                 roomNo: form.roomNo.value || '',
                 floorNo: form.floorNo.value || '',
             },
+            mobile: form.mobile.value,
             description: form.description.value,
         };
         const file = form.proof.files[0];
@@ -85,10 +85,6 @@ const ComplaintForm = () => {
     if(user === null) {
         return <></>
     }
-    // useEffect(() => {
-    //     if(user === null)
-    //         navigate(pages.login);
-    // }, []);
     const fileMutation = useMutation({
         mutationFn: sendFile,
         onSuccess: (responseData) => {
@@ -99,9 +95,6 @@ const ComplaintForm = () => {
 
     const dataMutation = useMutation({
         mutationFn: sendData,
-        // onSuccess: (responseData) => {
-        //     // toast.success('Registered complaint without file successfully');
-        // },
         onError
     });
 
@@ -122,75 +115,99 @@ const ComplaintForm = () => {
             <div>
                 <div className={styles.wrapper}>
                     <div style={{
-                        textAlign: 'center', fontSize: "xx-large", fontWeight: "bolder"
+                         fontSize: "x-large", fontWeight: "bolder"
                     }}>
-                        register your complaint here
+                        Register your complaint here
                     </div>
                     <form action="" className={styles.form} onSubmit={handleSubmit}>
                         <div className={styles.form_sub_wrapper}>
                             <div className={styles.personal_info_wrapper}>
                                 <p>Personal information</p>
                                 <div className={styles.inputs_label_wrapper}>
-                                    <label htmlFor="name">Name: </label>
-                                    <input type="text" name="name" disabled value={user.displayName}/>
+                                    <div className={styles.items}>
+                                        <label htmlFor="name">Name: </label>
+                                        <input type="text" name="name" disabled value={user.displayName}/>
+                                    </div>
+                                    <div className={styles.items}>
+                                        <label htmlFor="roll" style={{
+                                            marginRight: "3.4rem"
+                                        }}>Roll No: </label>
+                                        <input type="text" name="roll" disabled value={user.rollNo}/>
+                                    </div>
+                                    <div className={styles.items}>
+                                        <label htmlFor="mail">Email: </label>
+                                        <input type="email" name="mail" disabled value={user.email}/>
+                                    </div>
+                                    <div className={styles.items}>
+                                        <label htmlFor='mobile'>Mobile No: <span
+                                            className={styles.required}>*</span></label>
+                                        <div><input required type='tel' pattern='[0-9]{10}' name='mobile'/></div>
+                                    </div>
 
-                                    <label htmlFor="roll" style={{
-                                        marginRight: "3.4rem"
-                                    }}>Roll No :</label>
-                                    <input type="text" name="roll" disabled value={user.rollNo}/>
-
-                                    <label htmlFor="mail">Email: </label>
-                                    <input type="email" name="mail" disabled value={user.email}/>
-
-                                    <label htmlFor='mobile'>Mobile No: </label>
-                                    <div ><input type='tel' pattern='(+91)? [0-9]{10}'/></div>
                                 </div>
                             </div>
                             <br/>
+
                             <div>
                                 Complaint Details:
                             </div>
                             <div className={styles.inputs_label_wrapper}>
-                                <label>Date:</label>
-                                <div><input type="date" name="date" value={today} disabled id="date"/></div>
 
-                                <div><label htmlFor="type">Complaint Type:</label></div>
                                 <div>
-                                    <select name="type">
-                                        {Object.keys(complaintTypes).map((type, index) => {
-                                            return <option key={index} value={type}>{type.charAt(0).toUpperCase() + type.slice(1)}</option>
-                                        })}
-                                    </select>
+                                    <div><label htmlFor="type">Complaint Type:</label></div>
+                                    <div>
+                                        <select name="type">
+                                            {Object.keys(complaintTypes).map((type, index) => {
+                                                return <option key={index}
+                                                               value={type}>{type.charAt(0).toUpperCase() + type.slice(1)}</option>
+                                            })}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div><label htmlFor='title'>Title : <span
+                                        className={styles.required}>*</span></label></div>
+                                    <div><input type='text' name='title'/></div>
+                                </div>
+                                <div className={styles.location_wrapper}>
+                                    <div><label htmlFor="location">Location: <span className={styles.required}>*</span></label></div>
+                                    <div className={styles.location}>
+                                        <select name="building" required>
+                                            {
+                                                Object.keys(buildingsMap).map((building, index) => (
+                                                    <option key={index}
+                                                            value={buildingsMap[building]}>{building}</option>
+                                                ))
+                                            }
+                                        </select>
+                                        <div>
+                                            <label htmlFor="roomNo">Room No: </label>
+                                            <input type="text" name="roomNo" placeholder="Room No"/>
+                                        </div>
+
+                                        <div>
+                                            <label htmlFor="floorNo">Floor No: </label>
+                                            <input type="text" name="floorNo" placeholder="Floor No"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div><label htmlFor="description">Description: <span
+                                        className={styles.required}>*</span></label></div>
+                                    <div><textarea required name="description" cols={60} rows={10}></textarea></div>
                                 </div>
 
-                                <div><label htmlFor='title' >Title : </label></div>
-                                <div><input type='text' name='title'/></div>
-
-                                <div><label htmlFor="location">Location: </label></div>
-                                <div>
-                                    <select name="building" required>
-                                        {
-                                            Object.keys(buildingsMap).map((building, index) => (
-                                                <option key={index} value={buildingsMap[building]}>{building}</option>
-                                            ))
-                                        }
-                                    </select>
-                                    <input type="text" name="roomNo" placeholder="Room No"/>
-                                    <input type="text" name="floorNo" placeholder="Floor No"/>
-                                </div>
-
-                                <div><label htmlFor="description">Description: </label></div>
-                                <div><textarea name="description" cols={60} rows={10}></textarea></div>
-
-                                <div><label htmlFor="proof">Proof: </label></div>
-                                <div><input type="file" name='proof' accept='.jpg, .jpeg, .png, .gif, .bmp, .webp, .mp4, .webm, .ogg, .ogv'/></div>
+                            </div>
+                            <div>
+                                <label htmlFor='file'>Proof</label>
+                                <input type='file' name='proof' accept='image/*, video/*'/>
                             </div>
                         </div>
                         <div className={styles.buttons_wrapper}>
                             <button type="submit">Submit</button>
                             <button type="reset">Reset</button>
                         </div>
-                        </form>
+                    </form>
 
                 </div>
             </div>
