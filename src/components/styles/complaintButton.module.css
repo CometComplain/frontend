@@ -1,7 +1,6 @@
 .complaintButton {
     background-color: var(--primary-color-dark);
     cursor: pointer;
-    font-size: xx-large !important;
     display: flex;
     justify-content: center;
     align-items: center;

@@ -13,25 +13,19 @@ const ComplaintButton = () => {
     if( url.includes('/complaint-register')) display = "none";
     const naviagte = useNavigate();
     return (
-        <div style={{
-            display
-        }}
-             className={styles.complaintButton}
-        >
-            <button style={{
-                backgroundColor:'transparent',
+        <button
+            style={{
                 border:'none',
                 outline:'none',
                 color:'var(--quinary-color)',
-                fontSize: '1.1rem',
+                fontSize: 'larger',
+                display,
             }}
             onClick={() => {
                 naviagte(pages.registerComplaint);
             }}
-            >Complain</button>
-            &nbsp;
-            <img src={pen} />
-        </div>
+            className={styles.complaintButton}
+        >Complain &nbsp; <img src={pen} /></button>
     );
 }
 export default ComplaintButton;
