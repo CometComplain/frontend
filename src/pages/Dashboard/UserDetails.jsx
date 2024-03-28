@@ -1,12 +1,12 @@
 import {useUser} from "@/contexts/UserContextProvider.jsx";
-import {UserTypes} from "@/constants.js";
+import {reverseUserTypes, UserTypes} from "@/constants.js";
 
 const UserDetails = () => {
     const {user } = useUser();
     return (
-        <div className="flex justify-center" style={{
-            width: "100%",
+        <div className="flex justify-center w-full" style={{
             alignItems: "center",
+            height: 'calc(100% /3)'
         }}>
             <div className='flex w-fit flex-row gap-16 p-10 m-5 border border-gray-300 rounded-lg shadow-xl h-min'
              style={{
@@ -23,6 +23,7 @@ const UserDetails = () => {
                     <div className="flex flex-col gap-6">
                     <div className="">Name: {user.displayName}</div>
                         {user.role === UserTypes.Complainant && (<div className="">Roll No: {user.rollNo}</div>)}
+                        <div className="">Role: {reverseUserTypes[user.role]}</div>
                         <div className="">Email: {user.email}</div>
                     </div>
                     {user.role === UserTypes.Complainant && (
