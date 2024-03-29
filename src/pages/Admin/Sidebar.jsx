@@ -4,28 +4,32 @@ import Addusers from "./AddUsers";
 import Tables from "./Tables";
 import { Link } from "react-router-dom";
 import Statistics from "./Statistics";
-// dashboard
-// add userroles
-// tables
-// statistics 
+import dashboard from '@/assets/dashboard.svg';
+import tables from '@/assets/tables.svg';
+import statistics from '@/assets/statistics.svg';
+import add from '@/assets/addUsers.svg';
+
 
 const routes = [
     {
         title: "Dashboard",
         component: "MainDashboard",
-        
+        icon: dashboard
     },
     {
         title: "Add Users",
-        component: "Addusers"
+        component: "Addusers",
+        icon: add
     },
     {
         title: "Tables",
         component: "Tables",
+        icon: tables
     },
     {
         title: "Statistics",
         component: "Statistics",
+        icon: statistics
     }
 ];
 
@@ -46,8 +50,9 @@ const SideBar = ({setComponent}) => {
                 </Link>
             </div>
             <div className="m-4">
-                {routes.map(({ title, component }, index) => (
+                {routes.map(({ title, component, icon }, index) => (
                     <ul onClick={() => setComponent(component)} key={index} className="mb-4 flex flex-col gap-1">
+                        <img src={icon} />
                         {title && (
                             <li className="mx-3.5 mt-4 mb-2">
                                 {title}
