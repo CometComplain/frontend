@@ -6,9 +6,8 @@ const UserDetails = () => {
     return (
         <div className="flex justify-center w-full" style={{
             alignItems: "center",
-            height: 'calc(100% /3)'
         }}>
-            <div className='flex w-fit flex-row gap-16 p-10 m-5 border border-gray-300 rounded-lg shadow-xl h-min'
+            <div className='flex w-fit flex-wrap flex-row gap-16 p-10 m-5 border border-gray-300 rounded-lg shadow-xl h-min'
              style={{
                  alignItems: 'center',
              }}>
@@ -19,15 +18,15 @@ const UserDetails = () => {
                     }}
                     alt="Img"
                 />
-                <div className="flex gap-16">
-                    <div className="flex flex-col gap-6">
+                <div className="flex gap-16 flex-wrap">
+                    <div className="flex flex-col  gap-6">
                     <div className="">Name: {user.displayName}</div>
                         {user.role === UserTypes.Complainant && (<div className="">Roll No: {user.rollNo}</div>)}
                         <div className="">Role: {reverseUserTypes[user.role]}</div>
                         <div className="">Email: {user.email}</div>
                     </div>
                     {user.role === UserTypes.Complainant && (
-                        <div className="flex gap-5 text-base">
+                        <div className="flex flex-wrap gap-5 text-base">
                             <div className="flex flex-col items-center p-4 bg-orange-300 rounded justify-evenly">
                                 <div className="font-semibold ">Registered Complaints</div>
                                 <div className="text-3xl font-bold text-orange-900">{user.noOfComplaints}</div>

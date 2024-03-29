@@ -7,7 +7,7 @@ import Verifier from "./Verifier.jsx";
 import { useUser } from '@/contexts/UserContextProvider.jsx';
 import { UserTypes } from '@/constants.js';
 import {useEffect} from "react";
-import Admin from "@pages/Dashboard/Admin.jsx";
+import Admin from "@pages/Admin/";
 
 const dashBoardMaps = {
     [UserTypes.Complainant] : Complainant,
@@ -32,7 +32,10 @@ const Dashboard = () => {
         }
     }, []);
 
+    if (!user) return null;
+    if (user?.role === UserTypes.Admin) return (<Admin/>);
     const Component = dashBoardMaps[user?.role || UserTypes.Complainant];
+
     return (
         <>
             <div className={styles.dashboard}>

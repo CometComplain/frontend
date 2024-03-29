@@ -159,6 +159,7 @@ export const auLinks = {
     [UserTypes.Complainant]: [...verTechLinks, ...userSpecificLinks],
     [UserTypes.Verifier]: verTechLinks,
     [UserTypes.Technician]: verTechLinks,
+    [UserTypes.Admin]: verTechLinks,
 };
 
 export const subs = {
