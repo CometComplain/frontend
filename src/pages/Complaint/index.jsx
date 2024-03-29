@@ -111,7 +111,8 @@ const firstRow = "text-base font-medium text-gray-600";
 const secondRow = "font-bold text-xl";
 const row = "flex flex-col gap-1";
 const col = "flex flex-col flex-wrap gap-5"
-const attachmentUrl = googleImage;
+// const attachmentUrl = googleImage;
+const attachmentUrl = 'http://localhost:3000/background.jpg';
 
 
 const Complaint = () => {

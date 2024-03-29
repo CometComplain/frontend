@@ -5,26 +5,27 @@ import {handleScroll, RenderComplaints} from "@pages/Dashboard/utils.jsx";
 import {useState} from "react";
 import {toast} from "sonner";
 import {onError} from "@/utils/index.js";
-import {timeGap} from "@/constants.js";
+import {statusMap, timeGap} from "@/constants.js";
 import userComplaint from "@components/Complaints/UserComplaint.jsx";
 
 
 const subUrl = "complainant";
 
-const solvedKey = ['complaints', subUrl, 'solved'];
-const pendingKey = ['complaints', subUrl, "pending"];
+// const solvedKey = ['complaints', subUrl, 'solved'];
+const complaintsKey = ['complaints', subUrl, 'all'];
 const divStyle= "flex items-center gap-3 p-2 mx-1 my-2 border border-gray-300 rounded shadow w-fit";
 
 
 const Complainant = () => {
-    const [filter, setFilter] = useState('');
+    const [filter, setFilter] = useState(-1);
     const [search, setSearch] = useState('');
 
     let timer;
     const handleSearch = (event) => {
         clearTimeout(timer);
         timer = setTimeout(() => {
-            setSearch(event.target.value);
+            setSearch(event.target.value.toLowerCase());
+            console.log('searching');
         }, timeGap);
     }
     const queryClient = useQueryClient();
@@ -35,18 +36,14 @@ const Complainant = () => {
                 value: pageParam ,
                 name: 'page',
             },
-            {
-                value: queryKey[2],
-                name: 'type'
-            }
         ], subUrl),
         getNextPageParam: prevData => prevData.nextPage,
     }
 
 
 
-    const complaintsDiv = (renderableComplaints) => {
-        renderableComplaints = renderableComplaints.filter(complaint => complaint.complaintId.includes(search));
+    const complaintsDiv = (renderableComplaints = []) => {
+        console.log(`re-rendering for filter  ${filter} : `, renderableComplaints);
         return (
             <>
                 <div className='flex'>
@@ -54,12 +51,15 @@ const Complainant = () => {
                         <label htmlFor="filter" className="text-base capitalize">filter :</label>
                         <select id="filter"
                                 onChange={(event) => {
-                                    setFilter(event.target.value)
+                                    setFilter(Number(event.target.value))
                                 }}
                                 className="p-1 text-base border-2 border-black rounded" name="filter">
-                            <option value="">All</option>
-                            <option value="accepted">Accepted</option>
-                            <option value="verified">Verified</option>
+                            <option value={`-1`}>All</option>
+                            <option value={`${statusMap.Pending}`}>Pending</option>
+                            <option value={`${statusMap.Verified}`}>Verified</option>
+                            <option value={`${statusMap.Accepted}`}>Accepted</option>
+                            <option value={`${statusMap.Solved}`}>Solved</option>
+                            <option value={`${statusMap.Rejected}`}>Rejected</option>
                         </select>
                     </div>
                     <div className={divStyle}>
@@ -67,7 +67,7 @@ const Complainant = () => {
                         <input type='text' placeholder='Enter Complaint Id' onChange={handleSearch}/>
                     </div>
                 </div>
-                <div className={styles.solved_complaints} onScroll={(event) => handleScroll(event, queriesMap[filter])}>
+                <div className={styles.solved_complaints} onScroll={(event) => handleScroll(event, [allComplaintsQuery])}>
                     <RenderComplaints renderableComplaints={renderableComplaints} Component={userComplaint} props={{
                         deleteMutation,
                     }}/>
@@ -76,44 +76,34 @@ const Complainant = () => {
             </>
         )
     }
-    const solvedComplaintsQuery = useInfiniteQuery({
-        queryKey: solvedKey,
-        ...options,
-    });
-    const pendingComplaintsQuery = useInfiniteQuery({
-        queryKey: pendingKey,
+
+    const allComplaintsQuery = useInfiniteQuery({
+        queryKey: complaintsKey,
         ...options,
     });
 
-    const queriesMap = {
-        'solved': [solvedComplaintsQuery],
-        'pending': [pendingComplaintsQuery],
-        '': [solvedComplaintsQuery, pendingComplaintsQuery],
-    }
     const deleteMutation = useMutation({
         mutationFn: deleteComplaint,
         onSuccess: () => {
             toast.success('Complaint deleted sucessfully');
-            queryClient.invalidateQueries(pendingKey);
+            queryClient.invalidateQueries(complaintsKey);
         },
         onError,
     });
-    const solvedComplaints = solvedComplaintsQuery.data?.pages.flatMap(page => page.complaints) || []
-    const pendingComplaints = pendingComplaintsQuery.data?.pages.flatMap(page => page.complaints) || []
-    const allComplaints = [...solvedComplaints, ...pendingComplaints];
+    const allComplaints = allComplaintsQuery.data?.pages.flatMap(page => page.complaints) || []
     // allComplaints.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
-    const complaintsMap = {
-        'solved': solvedComplaints,
-        'pending': pendingComplaints,
-        '': allComplaints,
-    }
     return (
         <div className={styles.solved_complaints_wrapper}>
             <div className="p-5 text-2xl font-semibold bg-gray-300">Complaints</div>
-            {solvedComplaintsQuery.isLoading && 'fetching complaints...'}
-            {solvedComplaintsQuery.isError && solvedComplaintsQuery.error.message}
-            {solvedComplaintsQuery.isSuccess && complaintsDiv(complaintsMap[filter])}
+            {allComplaintsQuery.isLoading && 'fetching complaints...'}
+            {allComplaintsQuery.isError && allComplaintsQuery.error.message}
+            {allComplaintsQuery.isSuccess && complaintsDiv(allComplaints.filter(complaint => {
+                if(filter !== -1 && filter !== complaint.status) return false;
+                if(search === '') return true;
+                if (complaint.complaintId.includes(search)) return true;
+                return complaint.title.toLowerCase().includes(search);
+            }))}
         </div>
     );
 }

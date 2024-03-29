@@ -18,11 +18,11 @@ const coverRequests = async (func, params) => {
 
 export const getComplaints = async (params = [], subUrl = '') => await coverRequests(async (params, subUrl) => {
 
-    const stringifiedParams = params.map((param) => `${param.name}=${param.value}`).join('&');
+    const stringifiedParams = params.map((param) => param ? `${param.name}=${param.value}` : '').join('&').replace(/&$/, '');
     const apiUrl = `${apiRoutes.getComplaints}/${subUrl}?${stringifiedParams}`;
     const response = await customAxios.get(apiUrl);
-
     if (response.status === 404) throw new Error('no data');
+    console.log(`::response for param ${stringifiedParams} `, response.data)
     return response.data;
 }, [params, subUrl]);
 

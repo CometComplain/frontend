@@ -29,13 +29,12 @@ const Technician = () => {
     const handleSearch = (event) => {
         clearTimeout(timer);
         timer = setTimeout(() => {
-            setSearch(event.target.value);
+            setSearch(event.target.value.toLowerCase());
         }, timeGap);
     }
 
     const queryClient = useQueryClient();
-    const complaintsDiv = (renderableComplaints) => {
-        renderableComplaints = renderableComplaints.filter(complaint => complaint.complaintId.includes(search));
+    const complaintsDiv = (renderableComplaints = []) => {
         return (
             <>
                 <div className='flex'>
@@ -137,7 +136,7 @@ const Technician = () => {
             {technicianPendingComplaintQuery.isLoading && "fetching complaints..."}
             {technicianPendingComplaintQuery.isError &&
                 technicianPendingComplaintQuery.error.message}
-            {technicianPendingComplaintQuery.isSuccess && complaintsDiv(complaintsMap[filter])}
+            {technicianPendingComplaintQuery.isSuccess && complaintsDiv(complaintsMap[filter].filter(complaint => complaint.complaintId.toLowerCase().includes(search) || complaint.title.includes(search)))}
         </div>
     );
 };
