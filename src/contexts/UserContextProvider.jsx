@@ -37,7 +37,7 @@ export const UserContextProvider = ({ children }) => {
         }
         if (data) {
             setUser(prevData => data);
-            console.log(data);
+            // console.log(data);
             setRequested(true);
         }
     }, [isError, data]);

@@ -8,7 +8,7 @@ export const loadMore = (complaintsQuery) => {
     }
 }
 export const handleScroll = (event, querysArray) => {
-    console.log('reached handleScroll');
+    // console.log('reached handleScroll');
     event.preventDefault();
     event.stopPropagation();
     const {scrollTop, clientHeight, scrollHeight} = event.target;

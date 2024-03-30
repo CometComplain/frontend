@@ -46,6 +46,8 @@ const Complainant = () => {
     if(allComplaintsQuery.isError) return allComplaintsQuery.error.message
 
     const allComplaints = allComplaintsQuery.data?.pages.flatMap(page => page.complaints) || []
+    // console.log(allComplaints);
+    allComplaints.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     return (
         <div className={styles.solved_complaints_wrapper}>
             <div className="p-5 text-2xl font-semibold bg-gray-300">Complaints</div>

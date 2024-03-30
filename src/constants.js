@@ -108,6 +108,7 @@ export const apiRoutes = {
     solveComplaint: "/api/grievance/solve",
     getUser: "/api/grievance/auth/pinguser",
     getUsers: "/api/grievance/auth/users",
+    getComplaintCounts: '/api/grievance/complaintcount',
     backendUrl,
     // login:`${backendUrl}/api/v1/auth/google`,
     login: `${backendUrl}/grievance/auth/google`,
@@ -166,7 +167,7 @@ export const auLinks = {
 export const subs = {
     Home: [
         { name: "About", path: "/#about" },
-        { name: "Contact", path: "/#contact" },
+        // { name: "Contact", path: "/#contact" },
     ],
 };
 

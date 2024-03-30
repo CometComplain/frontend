@@ -129,7 +129,7 @@ const Complaint = () => {
 
     const {complaint, acceptedBy, createdBy} = data;
     const Component = userMap[user.role];
-    console.log(data);
+    // console.log(data);
 
     const resolvedDate = new Date(complaint.createdAt);
     const createdDate = new Date(complaint.createdAt);

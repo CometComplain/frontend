@@ -13,8 +13,8 @@ const parsingMap = {
 }
 const UserCard = ( { item, index } ) => {
     const { domain, role, isBlocked, displayName, email } = item;
-    console.log('item ', item);
-    console.log('role: ', role);
+    // console.log('item ', item);
+    // console.log('role: ', role);
 
     return (
         <div className={` ${styles.user} ${isBlocked ? 'bg-gray-500' : ''} rounded-md shadow-lg`}>

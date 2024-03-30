@@ -36,6 +36,7 @@ const Users = () => {
                    searchParam={'displayName'}
                    altsearchParam={'rollNo'}
                    header={header}
+                   queries={[usersQuery]}
                    styles={{
                        height: '70vh',
                    }}

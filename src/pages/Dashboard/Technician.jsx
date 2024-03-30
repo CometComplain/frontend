@@ -146,7 +146,7 @@ const Technician = () => {
     if(technicianPendingComplaintQuery.isLoading) return <Loading />
     if(technicianPendingComplaintQuery.isError) return technicianPendingComplaintQuery.error.message
 
-    console.log(technicianPendingComplaintQuery.data?.pages);
+    // console.log(technicianPendingComplaintQuery.data?.pages);
     const pendingComplaints = technicianPendingComplaintQuery.data?.pages.flatMap(page => page.complaints) || [];
     const acceptedComplaints = technitianAcceptedComplaintQuery.data?.pages.flatMap(page => page.complaints) || [];
     // const complaintsMap = {

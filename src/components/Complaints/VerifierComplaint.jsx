@@ -5,7 +5,6 @@ import styles from '../styles/complaint.module.css';
 import {toast} from "sonner";
 
 const VerifierComplaint = ({item, verifyMutation, rejectMutation, index}) => {
-
     return (
         <>
             <Complaint item={item} index={index}>

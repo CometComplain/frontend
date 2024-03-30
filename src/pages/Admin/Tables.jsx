@@ -27,7 +27,7 @@ const Tables = () => {
                     onChange={(event) => {
                     setFilter(event.target.value)
                 }}>
-                    <option value='users'>Users</option>
+                    <option value='users'>Complainants (users)</option>
                     <option value='complaints'>Complaints</option>
                 </select>
                 {Component ? <Component /> : "Dont mess with anything" }

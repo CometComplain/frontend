@@ -7,7 +7,6 @@ import ComplaintForm from "@pages/Form/index.jsx";
 import Footer from "@components/Footer/index.jsx";
 import ComplaintButton from "@components/ui/ComplaintButton.jsx";
 import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import {Toaster} from "sonner";
 import React from "react";
 
@@ -15,7 +14,7 @@ const routes = createBrowserRouter(createRoutesFromElements(<Route
     path="/"
     element={<>
         <IndexLayout/>
-        <ComplaintButton/>
+      {<ComplaintButton/>}
     </>}
 >
     <Route
@@ -49,7 +48,6 @@ const App = () => {
                         }}
                     />
                     <RouterProvider router={routes}/>
-                    <ReactQueryDevtools/>
                 </UserContextProvider>
             </QueryClientProvider>
         </>);

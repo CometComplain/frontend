@@ -22,7 +22,7 @@ const Complaints = () => {
     if (isLoading) return <Loading />
     if (isError) return <div>Error fetching data</div>
     const flattenedData = data.pages.flatMap(complaints => complaints.complaints ) // change according to the data
-    console.log('flattenedData ', flattenedData);
+    // console.log('flattenedData ', flattenedData);
     return (
         <div style={{
             height: '70vh',

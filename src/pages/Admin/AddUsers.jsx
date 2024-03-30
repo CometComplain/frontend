@@ -25,7 +25,7 @@ const AddUsers = () => {
                 role: type,
                 domain: Number(form.domain?.value),
             }
-            console.log(data);
+            // console.log(data);
             await createMutation.mutateAsync(data);
     };
     return (

@@ -34,7 +34,7 @@ const Navbar = ({auLinks = [], unAuLinks = [], subs = {}}) => {
             <nav className={`${styles.navbar} header`}>
                 <div className={styles.logo_menu_wrapper}>
                     <div className={styles.navbar__logo}>
-                        logo
+                        <img src="/public/assests/logo.png" alt="Logo"  width={130}/>
                     </div>
                     <span className={styles.menu_icon} onClick={toggleDropdown}>
                     {isDropdownOpen ? '✖' : '☰'}

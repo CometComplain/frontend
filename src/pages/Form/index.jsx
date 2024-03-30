@@ -9,7 +9,7 @@ import InputCard from "@components/ui/InputCard.jsx";
 
 
 const sendData = async ([complaintData, file]) => {
-    console.log(complaintData, file);
+    // console.log(complaintData, file);
     if (!complaintData || !file) throw new Error('Not a well structured form');
 
     const formData = new FormData();
@@ -103,7 +103,7 @@ const ComplaintForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const [formData, file] = getFormData(event);
-        console.log(formData, file);
+        // console.log(formData, file);
         const complaint = formatAsaRequest(formData);
         await dataMutation.mutateAsync([complaint, file]);
     };

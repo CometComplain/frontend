@@ -21,7 +21,7 @@ const TechniciansTable = () => {
     if (!data) return <div>No data</div>;
 
     const flatData = data.pages.flatMap(page => page.users);
-    console.log(flatData);
+    // console.log(flatData);
     return (
         <TempTable Component={userCard}
                    data={flatData}

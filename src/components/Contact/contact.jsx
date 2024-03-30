@@ -1,11 +1,11 @@
 import styles from "./styles.module.css";
-import googleImage from '@/assets/google.png';
+import React from "react";
 const Contact = () => {
     return (
         <div id="contact" className="flex flex-col gap-6 p-10 pt-5">
             <p className="text-4xl font-semibold text-center text-blue-900">Contact</p>
             <div
-                className={`flex items-start flex-wrap justify-center gap-20`}
+                className={`flex items-center flex-wrap justify-center gap-20`}
             >
                 <div className="flex flex-col gap-2 w-72">
                     <span className="text-2xl font-semibold">Address</span>
@@ -46,7 +46,11 @@ const Contact = () => {
                     </div>
                 </div>
                 <div>
-                    <img src={googleImage} className="w-24 h-24" />
+                    <img src={'/public/assests/IIIT-Kottayam.png'} alt="Logo" height={250} width={250}
+                        style={{
+                            backgroundBlendMode: "multiply",
+                        }}
+                    />
                 </div>
             </div>
         </div>

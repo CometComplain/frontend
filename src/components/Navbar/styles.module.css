@@ -4,7 +4,7 @@
     display: flex;
     justify-content: space-between;
     align-items: stretch;
-    padding: .05rem .3rem .05rem .3rem;
+    /*padding: .5rem 1rem !important;*/
     flex-wrap: nowrap;
 }
 
@@ -67,7 +67,6 @@
 }
 .navbar__logo {
     font-size: 1.5rem;
-    /*font-weight: bold;*/
     color: black;
 }
 
@@ -92,7 +91,7 @@
 /*desktop specific */
 @media (min-width: 768px) {
     .navbar {
-        padding: .2em 1em;
+        padding: 1.2rem .5rem !important;
     }
 
     .menu_icon {

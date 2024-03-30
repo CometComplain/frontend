@@ -1,6 +1,6 @@
 import {apiRoutes, customAxios} from "@/constants.js";
 import axios from "axios";
-import {useLogout} from "@/utils/index.js";
+// import {useLogout} from "@/utils/index.js";
 
 const coverRequests = async (func, params) => {
     try {
@@ -11,7 +11,7 @@ const coverRequests = async (func, params) => {
                 // useLogout();
             }
         }
-        console.log('got an error: ', error);
+        // console.log('got an error: ', error);
     }
     throw new Error('Error fetching complaints');
 }
@@ -42,9 +42,10 @@ export const verifyComplaint = async (id) => await coverRequests(async () => {
 
 export const rejectComplaint = async (id) => await coverRequests(
     async () => {
-        const response = await customAxios.post(apiRoutes.rejectComplaint);
+        // console.log('rejecting complaint with id : ', id);
+        const response = await customAxios.put(apiRoutes.rejectComplaint, {complaintId: id});
         return response.data;
-    }
+    }, []
 )
 
 export const acceptComplaint = async (id) => await coverRequests(async () => {
@@ -62,7 +63,7 @@ export const solveComplaint = async (id) => await coverRequests(async (id) => {
 },[id]);
 
 export const getUsers = async (page, type) => await coverRequests(async () => {
-    console.log('page : ', page, 'type : ', type);
+    // console.log('page : ', page, 'type : ', type);
     const formattedRequest = `${apiRoutes.getUsers}/${type}?page=${page}`;
     const response = await customAxios.get(formattedRequest);
     return response.data;
@@ -70,5 +71,10 @@ export const getUsers = async (page, type) => await coverRequests(async () => {
 
 export const createUser = async (data) => await coverRequests(async () => {
     const response = await customAxios.post(apiRoutes.createUser, data);
+    return response.data;
+}, []);
+
+export const getComplaintCounts = async () => await coverRequests(async () => {
+    const response = await customAxios.get(apiRoutes.getComplaintCounts);
     return response.data;
 }, []);

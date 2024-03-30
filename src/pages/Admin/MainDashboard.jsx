@@ -2,6 +2,7 @@ import DetailsCard from "@components/ui/DetailsCard.jsx";
 import VerifiersTable from "@pages/Admin/VerifiersTable.jsx";
 import TechniciansTable from "@pages/Admin/TechniciansTable.jsx";
 import {useState} from "react";
+import ComplaintCounts from "@pages/Admin/ComplaintCounts.jsx";
 
 const filteredComponents = {
         verifiers: VerifiersTable,
@@ -15,13 +16,7 @@ const MainDashboard = () => {
         <div className=' w-full p-20 flex flex-col ' style={{
             height: '95vh',
         }}>
-            <div className='flex gap-2 p-10 h-fit justify-between flex-wrap shadow-lg rounded-md'>
-                <DetailsCard title={'Accepted'} content={10}/>
-                <DetailsCard title={'Solved'}  content={20}/>
-                <DetailsCard title={'Pending'}  content={30}/>
-                <DetailsCard title={'Verified'}  content={40}/>
-                <DetailsCard title={'Rejected'}  content={50}/>
-            </div>
+            <ComplaintCounts />
             <div className='flex gap-2 justify-around flex-wrap my-6 rounded-md'
                  style={{
                      maxHeight: '75%',
