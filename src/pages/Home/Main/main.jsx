@@ -1,15 +1,16 @@
 import {useLocation, useNavigate} from "react-router-dom";
 import {useUser} from "@/contexts/UserContextProvider.jsx";
 import React from "react";
+import styles from '../styles.module.css'
 
-const ActualHome = () => {
+const   ActualHome = () => {
     const { user} = useUser();
     const navigate = useNavigate();
     return (
-        <div id="home" className="flex flex-row items-start justify-between p-10 bg-gray-200" >
+        <div id="home" className={`${styles.home} flex flex-row items-start justify-between p-10 pt-36 bg-gray-200`}  >
             <div className="flex flex-col w-1/2 gap-4">
                 <div className="text-4xl font-bold text-blue-900">
-                Welcome to Campus Concerns, A Platform for submit complaints and get resolutions
+                Welcome to Campus Concerns, A Platform for submit complaints and get resolutions
                 </div>
                 <div className="text-base text-gray-800">
                 The Student Complaint Management System, designed to prioritize your feedback and concerns throughout your academic journey. At Indian Institute Of Information Technology Kottayam, we value transparency, timely action, and confidentiality in handling your complaints. Using this system, you can easily submit complaints, track their progress, and expect prompt resolutions to ensure a positive and enriching experience for all students.

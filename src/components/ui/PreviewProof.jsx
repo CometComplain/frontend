@@ -5,6 +5,7 @@ const col = "flex flex-col gap-5"
 
 
 const PreviewProof = ({ attachmentUrl }) => {
+    if(!attachmentUrl) return null;
     return (
         <>
             <div className={`${firstRow} text-5xl`}>

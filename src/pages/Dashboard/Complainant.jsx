@@ -5,12 +5,12 @@ import {complaintHeader, handleScroll, RenderItems} from "@pages/Dashboard/utils
 import {useState} from "react";
 import {toast} from "sonner";
 import {onError} from "@/utils/index.js";
-import {reverseStatusMap, selectOptions, statusMap, timeGap} from "@/constants.js";
+import {reverseStatusMap, selectOptions, statusMap, timeGap, UserTypes} from "@/constants.js";
 import UserComplaint from "@components/Complaints/UserComplaint.jsx";
 import TestTable from "@components/ui/TempTable.jsx";
 import Loading from "@components/ui/Loading.jsx";
 
-const subUrl = "complainant";
+const subUrl = UserTypes.Complainant;
 
 const complaintsKey = ['complaints', subUrl, 'all'];
 

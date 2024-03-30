@@ -18,7 +18,7 @@ const Users = () => {
 
     if (isLoading) return <Loading />
     if (isError) return <div>Error fetching data</div>
-    const flattenedData = data.pages.flatMap(users => users) // change according to the data
+    const flattenedData = data.pages.flatMap(pages => pages.users ) // change according to the data
     // const flattenedData = Array.from({ length: 20 }, (v, i) => {
     //
     //     return {

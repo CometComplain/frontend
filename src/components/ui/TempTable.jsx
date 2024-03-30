@@ -44,9 +44,9 @@ const complaintsDiv = ({props, styles, data, searchParam, queries,altsearchParam
 
     if(ref.current) {
         const isOverflowingVertically = ref.current.scrollHeight > ref.current.clientHeight;
-        console.log('isOverflowingVertically : ', isOverflowingVertically);
+        // console.log('isOverflowingVertically : ', isOverflowingVertically);
         if(!isOverflowingVertically) {
-            console.log('loading more');
+            // console.log('loading more');
             queries.forEach((queryInstance) => loadMore(queryInstance));
         }
     }

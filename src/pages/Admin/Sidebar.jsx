@@ -35,7 +35,7 @@ const routes = [
 
 
 const SideBar = ({setComponent}) => {
-    const [openSidenav, setOpenSidenav] = useState(true);
+    const [openSidenav, setOpenSidenav] = useState(false);
     return (
         <div className="flex">
         <aside

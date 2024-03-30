@@ -12,7 +12,7 @@
 .solved_complaints_wrapper {
     display: flex;
     margin: 1rem;
-    height: calc((1.8)*95vh / 3);
+    height: calc((2)*95vh / 3);
     border-radius: 1rem;
     flex-direction: column;
     justify-content: stretch;

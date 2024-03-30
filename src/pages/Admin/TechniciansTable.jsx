@@ -4,12 +4,15 @@ import UserCard from "@components/ui/UserCard.jsx";
 import {getUsers} from "@api/apiCalls.js";
 import {useInfiniteQuery} from "@tanstack/react-query";
 import Loading from "@components/ui/Loading.jsx";
+import TempTable from "@components/ui/TempTable.jsx";
+import userCard from "@components/ui/UserCard.jsx";
+import {complainantHeader} from "@pages/Dashboard/utils.jsx";
 
 
 const TechniciansTable = () => {
     const techniciansQuery = useInfiniteQuery({
         queryKey: ['technicians'],
-        queryFn: (page = 0) => getUsers(page, UserTypes.Technician),
+        queryFn: ({pageParam = 1}) => getUsers(pageParam, UserTypes.Technician),
         getNextPageParam: lastPage => lastPage.nextPage,
     });
     const {data, error, isLoading, isError} = techniciansQuery;
@@ -17,7 +20,17 @@ const TechniciansTable = () => {
     if (isError) return <div>Error: {error.message}</div>;
     if (!data) return <div>No data</div>;
 
-    return (<Table title='Technicians'  Component={UserCard}/>);
+    const flatData = data.pages.flatMap(page => page.users);
+    console.log(flatData);
+    return (
+        <TempTable Component={userCard}
+                   data={flatData}
+                   queries={[techniciansQuery]}
+                   header={complainantHeader(UserTypes.Technician)}
+                   searchParam={'displayName'}
+                   altsearchParam={'email'}
+        />
+    );
 }
 
 export default TechniciansTable;

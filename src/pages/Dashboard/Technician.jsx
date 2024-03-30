@@ -6,14 +6,14 @@ import {complaintHeader, handleScroll, RenderItems} from "@pages/Dashboard/utils
 import {useState} from "react";
 import {toast} from "sonner";
 import {onError} from "@/utils/index.js";
-import {complaintTypes, statusMap, timeGap} from "@/constants.js";
+import {complaintTypes, statusMap, timeGap, UserTypes} from "@/constants.js";
 import TestTable from "@components/ui/TempTable.jsx";
 import TempTable from "@components/ui/TempTable.jsx";
 import UserComplaint from "@components/Complaints/UserComplaint.jsx";
 import Loading from "@components/ui/Loading.jsx";
 
 
-const subUrl = "technician";
+const subUrl = UserTypes.Technician;
 const pendingKey = ["complaints", subUrl, "pending"];
 const acceptedKey = ["complaints", subUrl, "accepted"];
 const selectOptions = [

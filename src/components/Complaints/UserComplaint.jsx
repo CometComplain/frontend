@@ -9,7 +9,7 @@ const UserComplaint = ({item, deleteMutation, index}) => {
         <>
             <Complaint item={item} index={index}>
                 {
-                    statusMap.Pending === item.status && <button className={styles.button} onClick={(event) => {
+                    statusMap.Solved > item.status && <button className={styles.button} onClick={(event) => {
                         event.preventDefault();
                         event.stopPropagation();
                         deleteMutation.mutate(item.complaintId)

@@ -8,8 +8,9 @@ import complaintStyle from "@components/styles/complaint.module.css";
 import TempTable from "@components/ui/TempTable.jsx";
 import Loading from "@components/ui/Loading.jsx";
 import {onError} from "@/utils/index.js";
+import {UserTypes} from "@/constants.js";
 
-const subUrl = "verifier";
+const subUrl = UserTypes.Verifier;
 
 const key = ["complaints", subUrl];
 const Verifier = () => {

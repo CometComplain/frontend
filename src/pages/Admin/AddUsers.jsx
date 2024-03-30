@@ -11,10 +11,10 @@ const AddUsers = () => {
     const createMutation = useMutation({
         mutationFn:createUser,
         onError: (error) => {
-            axios.isAxiosError(error) ? toast(error.response.data.message) : toast('An error occurred in creating user');
+            axios.isAxiosError(error) ? toast.error(error.response.data.message) : toast.error('An error occurred in creating user');
         },
         onSuccess: (data) => {
-            toast('User created successfully');
+            toast.success('User created successfully');
         }
     })
     const handleSubmit = async (event) => {

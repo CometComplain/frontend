@@ -112,8 +112,6 @@ const firstRow = "text-base font-medium text-gray-600";
 const secondRow = "font-bold text-xl";
 const row = "flex flex-col gap-1";
 const col = "flex flex-col flex-wrap gap-5"
-// const attachmentUrl = googleImage;
-const attachmentUrl = 'http://localhost:3000/background.jpg';
 
 
 const Complaint = () => {
@@ -257,7 +255,7 @@ const Complaint = () => {
                             width: '100%',
                         }} >
                             <div className={`${row} items-center`}>
-                                <PreviewProof attachmentUrl={attachmentUrl}/>
+                                <PreviewProof attachmentUrl={complaint.proof}/>
                             </div>
                         </div>
                     </div>

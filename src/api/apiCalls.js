@@ -62,6 +62,7 @@ export const solveComplaint = async (id) => await coverRequests(async (id) => {
 },[id]);
 
 export const getUsers = async (page, type) => await coverRequests(async () => {
+    console.log('page : ', page, 'type : ', type);
     const formattedRequest = `${apiRoutes.getUsers}/${type}?page=${page}`;
     const response = await customAxios.get(formattedRequest);
     return response.data;

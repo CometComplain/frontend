@@ -97,9 +97,9 @@ export const backendUrl = "http://localhost:5000";
 
 export const apiRoutes = {
     registerComplaint: "/api/grievance/register",
-    createUser: "/api/grievance/auth/create",
+    createUser: "/api/grievance/auth/createUser",
     getComplaints: "/api/grievance/complaints",
-    getComplaintWithId: "/api/grievance/complaintWithId",
+    getComplaintWithId: "/api/grievance/complaint",
     deleteComplaint: "/api/grievance/delete",
     uploadProof: "/api/grievance/upload",
     verifyComplaint: "/api/grievance/verify",

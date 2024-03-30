@@ -24,12 +24,12 @@ const MainDashboard = () => {
             </div>
             <div className='flex gap-2 justify-around flex-wrap my-6 rounded-md'
                  style={{
-                     height: '75%',
+                     maxHeight: '75%',
                  }}
             >
                 <div
                     style={{
-                        height: '55vh',
+                        maxHeight: '55vh',
                         width: "100%",
                     }}
                     className='flex'
@@ -38,7 +38,7 @@ const MainDashboard = () => {
                         className='flex w-full shadow-lg rounded-lg flex-col '
                     >
                         <select
-                            className='w-fit p-1 mx-1 text-base border-2 border-black rounded'
+                            className='w-fit p-1 mx-1 text-base'
                             onChange={(event) => {
                                 setFilter(event.target.value)
                             }}>
@@ -46,7 +46,6 @@ const MainDashboard = () => {
                             <option value='technicians'>Technicians</option>
                         </select>
                         {Component ? <Component/> : "Dont mess with anything"}
-
                     </div>
                 </div>
             </div>

@@ -16,7 +16,7 @@ import {pages, reverseStatusMap, statusStylesMap} from "@/constants.js";
 const Complaint = ({ item, children, index}) => {
     const navigate = useNavigate();
     const {user} = useUser();
-    console.log(item);
+    // console.log(item);
     const date = new Date(item.createdAt);
     return (
         <div className={`${styles.complaint}`}>
