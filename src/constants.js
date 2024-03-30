@@ -38,18 +38,17 @@ export const Headers = {
 };
 
 export const complaintTypes =  {
-    electrical: 0,
-    plumbing: 1,
+    Electrical: 0,
+    Plumbing: 1,
     IT: 2,
-    others: 3,
+    Others: 3,
 };
 
 export const reverseComplaintTypes =  {
     [0]: 'Electrical',
     [1]: 'plumbing',
     [2]: 'IT',
-    [3]: 'Academics',
-    [4]: 'Others',
+    [3]: 'Others',
 };
 
 export const buildingsMap = {
@@ -98,6 +97,7 @@ export const backendUrl = "http://localhost:5000";
 
 export const apiRoutes = {
     registerComplaint: "/api/grievance/register",
+    createUser: "/api/grievance/auth/create",
     getComplaints: "/api/grievance/complaints",
     getComplaintWithId: "/api/grievance/complaintWithId",
     deleteComplaint: "/api/grievance/delete",
@@ -107,6 +107,7 @@ export const apiRoutes = {
     acceptComplaint: "/api/grievance/accept",
     solveComplaint: "/api/grievance/solve",
     getUser: "/api/grievance/auth/pinguser",
+    getUsers: "/api/grievance/auth/users",
     backendUrl,
     // login:`${backendUrl}/api/v1/auth/google`,
     login: `${backendUrl}/grievance/auth/google`,
@@ -178,3 +179,10 @@ export const statusStylesMap = {
     [statusMap.Solved]: "rounded-md px-2 bg-green-200 text-black",
     [statusMap.Rejected]: 'rounded-md px-2 bg-red-200 text-gray-700',
 }
+
+
+export const selectOptions = [{
+    value: -1, name: 'All',
+}, ...Object.entries(reverseStatusMap).map(([key, value]) => ({
+    value: key, name: value,
+}))]

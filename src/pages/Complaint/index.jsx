@@ -24,6 +24,7 @@ import {toast} from "sonner";
 import {onError} from "@/utils/index.js";
 import googleImage from '@/assets/google.png';
 import PreviewProof from "@components/ui/PreviewProof.jsx";
+import Loading from "@components/ui/Loading.jsx";
 
 
 const Verifier = ({complaint}) => {
@@ -125,7 +126,7 @@ const Complaint = () => {
     });
 
     const {data, isError, isLoading} = complaintQuery;
-    if (isLoading) return <div>Loading...</div>
+    if (isLoading) return <Loading />
     if (isError) return <div>Error Fetching Data</div>
 
     const {complaint, acceptedBy, createdBy} = data;

@@ -3,16 +3,16 @@ import { useMutation } from '@tanstack/react-query';
 import { deleteComplaint } from "@api/apiCalls";
 import styles from '../styles/complaint.module.css';
 import {statusMap} from "@/constants.js";
-const UserComplaint = ({complaint, deleteMutation, index}) => {
+const UserComplaint = ({item, deleteMutation, index}) => {
 
     return (
         <>
-            <Complaint complaint={complaint} index={index}>
+            <Complaint item={item} index={index}>
                 {
-                    statusMap.Pending === complaint.status && <button className={styles.button} onClick={(event) => {
+                    statusMap.Pending === item.status && <button className={styles.button} onClick={(event) => {
                         event.preventDefault();
                         event.stopPropagation();
-                        deleteMutation.mutate(complaint.complaintId)
+                        deleteMutation.mutate(item.complaintId)
                     }}>Delete it</button>
                 }
             </Complaint>

@@ -2,38 +2,21 @@ import VerifierComplaint from "@components/Complaints/VerifierComplaint.jsx";
 import styles from "./styles.module.css";
 import {useInfiniteQuery, useMutation, useQueryClient} from "@tanstack/react-query";
 import {getComplaints, rejectComplaint, verifyComplaint} from "@/api/apiCalls.js";
-import {handleScroll, RenderComplaints} from "@pages/Dashboard/utils.jsx";
+import {complaintHeader, handleScroll, RenderItems} from "@pages/Dashboard/utils.jsx";
 import {toast} from "sonner";
 import complaintStyle from "@components/styles/complaint.module.css";
+import TempTable from "@components/ui/TempTable.jsx";
+import Loading from "@components/ui/Loading.jsx";
+import {onError} from "@/utils/index.js";
 
 const subUrl = "verifier";
 
 const key = ["complaints", subUrl];
 const Verifier = () => {
     const queryClient = useQueryClient();
-    const complaintsDiv = (renderableComplaints) => (
-        <>
-            <div
-                className={styles.solved_complaints}
-                onScroll={(event) => handleScroll(event, [technitianComplaintQuery])}
-            >
-                <div className={complaintStyle.complaint} >
-                    <div>Sl No</div>
-                    <div>Complaint ID</div>
-                    <div>Created At</div>
-                    <div>Title</div>
-                    <div>Status</div>
-                    <div>Action</div>
-                </div>
-                <RenderComplaints renderableComplaints={renderableComplaints} Component={VerifierComplaint} props={{
-                    verifyMutation,
-                    rejectMutation,
-                }}/>
-            </div>
-        </>
-    );
 
-    const technitianComplaintQuery = useInfiniteQuery({
+
+    const verifierComplaintQuery = useInfiniteQuery({
         queryKey: key,
         queryFn: ({queryKey, pageParam = 1}) =>
             getComplaints(
@@ -65,17 +48,28 @@ const Verifier = () => {
         onError,
     });
 
-    const {data, isLoading, isError, isFetching, hasNextPage, error, isSuccess} = technitianComplaintQuery;
+    const {data, isLoading, isError, isFetching, hasNextPage, error, isSuccess} = verifierComplaintQuery;
+
+    if(isLoading) return <Loading />
+    if(isError) return error.message
 
     const complaints = data?.pages.flatMap(page => page.complaints) || [];
 
     return (
         <div className={styles.solved_complaints_wrapper}>
-            <h1>Technitian Complaints</h1>
-            {isLoading && "fetching complaints..."}
-            {isError &&
-                error.message}
-            {isSuccess && complaintsDiv(complaints)}
+            <div className={`p-5 text-2xl font-semibold bg-gray-300 ${styles.complaints}`}>Complaints</div>
+
+            {isSuccess && <TempTable
+                            data={complaints}
+                            header={complaintHeader}
+                            Component={VerifierComplaint}
+                            searchParam={'complaintId'}
+                            altsearchParam={'title'}
+                            queries={[verifierComplaintQuery]}
+                            props={{
+                                rejectMutation,
+                                verifyMutation
+                            }} /> }
         </div>
     );
 };

@@ -8,12 +8,13 @@ import {useUser} from "@/contexts/UserContextProvider.jsx";
 import InputCard from "@components/ui/InputCard.jsx";
 
 
-const sendData = async (complaintData, file) => {
+const sendData = async ([complaintData, file]) => {
+    console.log(complaintData, file);
     if (!complaintData || !file) throw new Error('Not a well structured form');
 
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('complaint', JSON.stringify(complaintData));
+    formData.append('data', JSON.stringify(complaintData));
     const response = await customAxios.post(apiRoutes.registerComplaint, formData);
     if (response.data['status'] === 'error') {
         throw new Error('bad request');
@@ -23,7 +24,7 @@ const sendData = async (complaintData, file) => {
 
 // const sendFile = async (file) => {
 //     if (!file) throw new Error('No file');
-
+//
 //     const fileForm = new FormData();
 //     fileForm.append('file', file);
 //     const response = await customAxios.post(apiRoutes.uploadProof, fileForm, {
@@ -85,9 +86,12 @@ const ComplaintForm = () => {
     }
     // const fileMutation = useMutation({
     //     mutationFn: sendFile,
+    //     onSuccess: (responseData) => {
+    //         toast.success('Registered complaint successfully');
+    //     },
     //     onError
     // })
-    
+
     const dataMutation = useMutation({
         mutationFn: sendData,
         onSuccess: (responseData) => {
@@ -99,8 +103,9 @@ const ComplaintForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const [formData, file] = getFormData(event);
+        console.log(formData, file);
         const complaint = formatAsaRequest(formData);
-        await dataMutation.mutateAsync(complaint);
+        await dataMutation.mutateAsync([complaint, file]);
     };
 
     const today = getDate();

@@ -8,6 +8,7 @@ import { useUser } from '@/contexts/UserContextProvider.jsx';
 import { UserTypes } from '@/constants.js';
 import {useEffect} from "react";
 import Admin from "@pages/Admin/";
+import Loading from "@components/ui/Loading.jsx";
 
 const dashBoardMaps = {
     [UserTypes.Complainant] : Complainant,
@@ -21,11 +22,7 @@ const Dashboard = () => {
     const navigate = useNavigate();
     const { user, requested } = useUser();
 
-    if(!requested) return (
-        <div>
-            loading...
-        </div>
-    );
+    if(!requested) return <Loading />;
     useEffect(() => {
         if(!user) {
             navigate('/login/', {replace: true});

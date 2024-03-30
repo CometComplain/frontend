@@ -4,13 +4,13 @@ import {rejectComplaint, verifyComplaint} from "@api/apiCalls";
 import styles from '../styles/complaint.module.css';
 import {toast} from "sonner";
 
-const VerifierComplaint = ({complaint, verifyMutation, rejectMutation}) => {
+const VerifierComplaint = ({item, verifyMutation, rejectMutation, index}) => {
 
     return (
         <>
-            <Complaint complaint={complaint}>
-                <button className={styles.button} onClick={() => verifyMutation.mutate(complaint.id)}>Verify it</button>
-                <button className={styles.button} onClick={() => rejectMutation.mutate(complaint.id)}>Reject it</button>
+            <Complaint item={item} index={index}>
+                <button className={styles.button} onClick={() => verifyMutation.mutate(item.complaintId)}>Verify it</button>
+                <button className={styles.button} onClick={() => rejectMutation.mutate(item.complaintId)}>Reject it</button>
             </Complaint>
 
         </>

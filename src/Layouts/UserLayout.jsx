@@ -3,6 +3,7 @@ import { useUser } from "@/contexts/UserContextProvider";
 import {pages, UserTypes} from '@/constants';
 import { useEffect } from "react";
 import {QueryClientProvider, useQueryClient} from "@tanstack/react-query";
+import Loading from "@components/ui/Loading.jsx";
 
 const UserLayout = () => {
     const { user, requested } = useUser();
@@ -20,12 +21,12 @@ const UserLayout = () => {
                 navigate(pages.login, {state: {reason: 'user not allowed'}})
         }
     }, [requested]);
-    if(user && path.includes('dashboard')) {
+    if(user && path.includes('dashboard') && user.role !== UserTypes.Admin) {
         queryClient.invalidateQueries(['user']);
     }
 
     if (!requested) {
-        return <div>Loading...</div>;
+        return <Loading />;
     }
 
     return (

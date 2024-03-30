@@ -13,25 +13,26 @@ import {pages, reverseStatusMap, statusStylesMap} from "@/constants.js";
 */
 
 
-const Complaint = ({complaint, children, index}) => {
+const Complaint = ({ item, children, index}) => {
     const navigate = useNavigate();
     const {user} = useUser();
-    const date = new Date(complaint.createdAt);
+    console.log(item);
+    const date = new Date(item.createdAt);
     return (
         <div className={`${styles.complaint}`}>
             <div>{index+1}</div>
-            <div>{complaint.complaintId}</div>
+            <div>{item.complaintId}</div>
             <div>{date.toDateString()}</div>
-            <div >{complaint.title}</div>
-            <div className={statusStylesMap[complaint.status]}
+            <div >{item.title}</div>
+            <div className={statusStylesMap[item.status]}
                 style={{
                     display: "flex",
                     alignItems: "center",
                 }}
-            >{reverseStatusMap[complaint.status]}</div>
+            >{reverseStatusMap[item.status]}</div>
             <div className={styles.actions_wrapper}>
                 <button onClick={() => {
-                    navigate(`${pages.complaint}/${complaint.complaintId}`)
+                    navigate(`${pages.complaint}/${item.complaintId}`)
                 }}
                 className={styles.button}
                 >View</button>

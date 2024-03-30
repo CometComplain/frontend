@@ -10,25 +10,12 @@ export const userContext = createContext({
     setUser: () => {},
 });
 
-// useEffect(() => {
-//     const getUser = async () => {
-//         try {
-//             const response = await customAxios.get(apiRoutes.getUser);
-//             console.log(response.data);
-//             setUser(prev => ({...response.data}));
-//         } catch (error) {
-//             if(axios.isAxiosError(error) && error.response.status === 401) {
-//                 setUser(null);
-//             }
-//             // toast.error(error.response.data.message);
-//         } finally {
-//             setRequested(true);
-//         }
-//     };
-//
-//     getUser();
-// }, []);
 
+const tempUser = {
+    displayName: 'Admin',
+    email: 'Admin@admin.com',
+    role: UserTypes.Admin,
+}
 
 export const UserContextProvider = ({ children }) => {
     const [user, setUser] = useState(null);
@@ -46,6 +33,7 @@ export const UserContextProvider = ({ children }) => {
     useEffect(() => {
         if (isError) {
             setRequested(true);
+            // setUser(tempUser); //temporary
         }
         if (data) {
             setUser(prevData => data);
@@ -53,10 +41,7 @@ export const UserContextProvider = ({ children }) => {
             setRequested(true);
         }
     }, [isError, data]);
-    // useEffect(() => {
-    //     setRequested(true)
-    //
-    // }, [user])
+
     return (
         <userContext.Provider value={{ user, setUser, requested }}>
             {children}

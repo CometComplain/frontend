@@ -2,23 +2,23 @@ import Complaint from "./Complaint.jsx";
 import styles from '../styles/complaint.module.css'
 import {statusMap} from "@/constants.js";
 
-const TechnicianComplaint = ({complaint, acceptMutation, solvedMutation, index}) => {
+const TechnicianComplaint = ({item, acceptMutation, solvedMutation, index}) => {
 
     return (
         <>
-            <Complaint complaint={complaint} index={index}>
+            <Complaint item={item} index={index}>
                 {
-                    complaint.status === statusMap.Verified && (<button className={styles.button} onClick={(event) => {
+                    item.status === statusMap.Verified && (<button className={styles.button} onClick={(event) => {
                         event.preventDefault();
                         event.stopPropagation();
-                        return acceptMutation.mutate(complaint.complaintId);
+                        return acceptMutation.mutate(item.complaintId);
                     }}>Accept it</button>)
                 }
                 {
-                    complaint.status === statusMap.Accepted && (<button className={styles.button} onClick={(event) => {
+                    item.status === statusMap.Accepted && (<button className={styles.button} onClick={(event) => {
                         event.preventDefault();
                         event.stopPropagation();
-                        return solvedMutation.mutate(complaint.complaintId);
+                        return solvedMutation.mutate(item.complaintId);
                     }}>Solve it</button>)
                 }
             </Complaint>

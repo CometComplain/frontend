@@ -1,6 +1,7 @@
 const InputCard = ({typeInput, name, LabelName, placeholder, styles, disabled, value, required, accept, props}) => {
     let size = value ? value.length : null;
     size = placeholder ? placeholder.length:size;
+    size = props && props.size ? props.size : size;
   return (
     <div className='flex flex-col gap-2'>
         <label htmlFor={name} className='text-base font-semibold'>{LabelName} {required &&

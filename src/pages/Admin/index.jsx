@@ -2,13 +2,13 @@ import styles from './styles.module.css';
 import SideBar from './Sidebar';
 import { useState } from 'react';
 import MainDashboard from './MainDashboard';
-import Addusers from './AddUsers';
+import AddUsers from './AddUsers';
 import Tables from './Tables';
 import Statistics from './Statistics';
 
 const componentsMap = {
     MainDashboard,
-    Addusers,
+    Addusers: AddUsers,
     Tables,
     Statistics,
 };
