@@ -1,14 +1,1 @@
-.about {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: stretch;
-    padding: 3rem;
-    /* background-color: rebeccapurple; */
-    gap: 1rem;
-}
-.about {
-    min-height: 50vh;
-    /* margin: 2rem 8rem; */
-}
 

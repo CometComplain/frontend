@@ -3,38 +3,41 @@ import styles from "./styles.module.css";
 
 const features = [
     {
-        heading: "Easy Complaint Submission",
+        heading: "/public/assests/sub2.0.png",
         content:
-            "Submitting a complaint should be straightforward and hassle-free. We've designed our process to be easy, ensuring your concerns are heard promptly and accurately.",
+            "At Campus Concerns, we've streamlined our complaint submission process for effortless and efficient reporting.",
     },
     {
-        heading: "Transparent Process",
+        heading: "/public/assests/processtran2.0.png",
         content:
-            "We believe in transparency. Our resolution process is designed to be transparent, keeping you informed and involved throughout.",
+            "Our system offers a transparent complaint management process, providing students with real-time updates.",
     },
     {
-        heading: "Status Tracking",
+        heading: "/public/assests/statustrack2.0.0.png",
         content:
-            "Stay informed with our status tracking feature. We believe in keeping you updated on the progress of your complaint.",
+            "Track the progress of your tasks effortlessly with our intuitive status tracking feature with real time updates.",
     },
     {
-        heading: "Document Verification and Spam Detection",
+        heading: "/public/assests/docver2.0.png",
         content:
-            "We prioritize information integrity and take measures to verify documents and prevent spam. Our processes ensure genuine and relevant complaints.",
+            "We prioritize the integrity of information and take proactive measures to verify documents and prevent spam submissions.",
     },
 ];
 
 
 const About = () => {
     return (
-        <div id="about" className={styles.about}>
-            <p className="text-4xl font-bold text-center">Features</p>
-            <div className={`flex flex-wrap justify-center gap-4`}>
+        <div id="about" className="flex flex-col items-center gap-10 px-5 py-10 bg-blue-900">
+            <div className="">
+            <p className="text-lg font-bold text-center text-white">Features</p>
+            <p className="text-2xl font-semibold text-center text-white">Campus Concern (Student Complaint Managment System)</p>  
+            </div>
+            <div className={`flex flex-wrap gap-3`}>
                 {features.map((feature, index) => (
                     <div key={index}
-                         className={`shadow-lg p-4 w-72 h-auto rounded-xl flex flex-col gap-2 justify-around`}>
-                        <span className='font-bold p-1 border-b-2'>{feature.heading}</span>
-                        <span>{feature.content}</span>
+                         className={`shadow-lg p-4 w-64  rounded-xl flex flex-col bg-white gap-6 items-center text-center justify-between`}>
+                        <img src={feature.heading}  height={100} width={100} />
+                        <div className="text-base font-semibold">{feature.content}</div>
                     </div>
                 ))}
             </div>

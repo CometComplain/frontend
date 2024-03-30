@@ -74,7 +74,7 @@ const getFormData = (e) => {
     }
 
 const Card = "flex flex-col gap-3 mx-5 my-3  border border-gray-300 rounded-lg shadow-lg"
-const heading = "p-5 text-2xl font-semibold bg-gray-300  rounded-t-lg"
+const heading = "p-5 text-2xl  font-semibold bg-blue-600 text-white  rounded-t-lg"
 const selectCSS = "py-2 pl-2 pr-6 text-base border border-gray-400 rounded shadow focus:outline-none w-fit"
 
 
@@ -111,32 +111,35 @@ const ComplaintForm = () => {
     const today = getDate();
 
     return (
-        <div className=''>
+        <div className='flex flex-col'>
+            <div className="self-center m-5 text-3xl font-bold text-zinc-800">
+                Register Your Complaint
+            </div>
             <form action='' className='flex flex-col' onSubmit={handleSubmit}>
                 {/* Personal Details */}
                 <div className={Card}>
                     <div className={heading}>Personal Details</div>
                     <div className="flex flex-col gap-5 p-5">
-                        <div className="flex flex-row gap-10 flex-wrap">
+                        <div className="flex flex-row flex-wrap gap-10">
                             <InputCard name={"name"} LabelName={"Name:"} value={user.displayName}
-                                       typeInput={"text"} disabled styles={" bg-gray-200"}/>
+                                    typeInput={"text"} disabled styles={" bg-gray-200"}/>
                             <InputCard name={"rollNumber"} LabelName={"Roll No:"}
-                                       value={user.rollNo} typeInput={"text"} disabled styles={" bg-gray-200"}/>
+                                    value={user.rollNo} typeInput={"text"} disabled styles={" bg-gray-200"}/>
                         </div>
                         <InputCard name={"email"} LabelName={"Email:"}
-                                   value={user.email} typeInput={"email"} disabled
-                                   styles={" bg-gray-200 w-96"}/>
+                                value={user.email} typeInput={"email"} disabled
+                                styles={" bg-gray-200 w-96"}/>
                         <InputCard props={{
                             pattern: '[0-9]{10}'
-                        }} name={"mobile"} LabelName={"Mobile Number (Optional)"}
-                                   typeInput={"number"} placeholder={"Enter Your Number"}/>
+                        }} name={"mobile"} LabelName={"Mobile Number (Optional)"} 
+                              styles={"w-fit"}  typeInput={"number"} placeholder={"Enter Your Number"}/>
                     </div>
                 </div>
                 {/* Compliant Details */}
                 <div className={Card}>
-                    <div className={heading}>Compliant Details</div>
+                    <div className={heading}>Complaint Details</div>
                     <div className="flex flex-col gap-5 p-5">
-                        <div className="flex flex-row gap-10 flex-wrap">
+                        <div className="flex flex-row flex-wrap gap-10">
                             <div className='flex flex-col gap-2'>
                                 <label htmlFor='complianttype' className='text-base font-medium'>Selcet
                                     Compliant <span className='text-red-600'>*</span></label>
@@ -163,11 +166,11 @@ const ComplaintForm = () => {
                 </div>
                 {/* Location  */}
                 <div className={Card}>
-                    <div className={heading}>Compliant Loaction</div>
+                    <div className={heading}>Complaint Loaction</div>
                     <div className="flex flex-col gap-5 p-5">
-                        <div className="flex flex-row gap-10 flex-wrap">
+                        <div className="flex flex-row flex-wrap gap-10">
                             <div className="flex flex-col gap-2">
-                                <label htmlFor='BuildingName' className='text-base font-medium'>Selcet Compliant <span
+                                <label htmlFor='BuildingName' className='text-base font-medium'>Selcet Complaint <span
                                     className='text-red-600'>*</span></label>
                                 <select name="building" className={selectCSS} required>
                                     {
@@ -179,9 +182,9 @@ const ComplaintForm = () => {
                                 </select>
                             </div>
                             <InputCard name={"roomNo"}  LabelName={"Room No"} typeInput={"text"}
-                                       placeholder={"Room Number"}/>
+                                    placeholder={"Room Number"}/>
                             <InputCard name={"floorNo"} LabelName={"Floor No"} typeInput={"text"}
-                                       placeholder={"Floor Number"}/>
+                                    placeholder={"Floor Number"}/>
                         </div>
                     </div>
                 </div>
@@ -189,19 +192,19 @@ const ComplaintForm = () => {
                 <div className={Card}>
                     <div className={heading}>Upload File</div>
                     <div className="flex flex-col gap-2 m-5 w-fit">
-                        <label htmlFor="proof" className='text-base font-semibold'>Upload supporting documents <span
+                        <label htmlFor="proof" className='text-base font-semibold'>Upload supporting documents(Image or Video) <span
                             className='text-red-600'>*</span></label>
-                        <input name="proof" className={"text-blue-500 border-dashed border-2 border-blue-500 shadow"}
-                               accept={".jpg, .jpeg, .png, .gif, .bmp, .webp, .mp4, .webm, .ogg, .ogv"} type={"file"}/>
+                        <input name="proof" className=''
+                            accept={".jpg, .jpeg, .png, .gif, .bmp, .webp, .mp4, .webm, .ogg, .ogv"} type={"file"}/>
                     </div>
                 </div>
-                <div className="flex flex-row gap-5 justify-center mx-6 mt-4 mb-10">
+                <div className="flex flex-row justify-center gap-5 mx-6 mt-4 mb-10">
                     <InputCard name={"submit"} typeInput={"submit"}
-                               styles="text-xl font-medium text-white bg-green-600 cursor-pointer hover:shadow-green-500"
-                               value={"submit"}/>
+                            styles="text-xl font-medium text-white bg-green-600 cursor-pointer hover:shadow-green-500"
+                            value={"submit"}/>
                     <InputCard name={"reset"} typeInput={"reset"}
-                               styles={"text-xl font-medium text-white bg-red-600 cursor-pointer hover:shadow-orange-500"}
-                               value={"reset"}/>
+                            styles={"text-xl font-medium text-white bg-red-600 cursor-pointer hover:shadow-orange-500"}
+                            value={"reset"}/>
                 </div>
             </form>
         </div>

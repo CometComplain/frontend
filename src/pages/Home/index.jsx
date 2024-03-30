@@ -5,31 +5,7 @@ import About from "@components/About/about.jsx";
 import {useLocation, useNavigate} from "react-router-dom";
 import {useUser} from "@/contexts/UserContextProvider.jsx";
 import {pages, UserTypes} from "@/constants.js";
-
-const ActualHome = () => {
-    const { user} = useUser();
-    const navigate = useNavigate();
-    return (
-        <div className={styles.home} id='home'>
-            <h1 className='text-4xl font-bold'>
-                { user && `Welcome ${user.displayName}` || 'Login to register a complaint' }
-            </h1>
-            { ((user && user.role === UserTypes.Complainant) || !user) && (
-                <button onClick={
-                    () => {
-                        if (user) {
-                            navigate(pages.registerComplaint);
-                        } else {
-                            navigate(pages.login);
-                        }
-                    }
-                }
-                        className={styles.complaintButton}
-                >Raise a complaint</button>
-            )}
-        </div>
-    );
-}
+import ActualHome from './Main/main';
 
 const Home = () => {
     const url = window.location.href;
