@@ -8,6 +8,8 @@ const UserDetails = () => {
     const HeadDivStyle = "flex flex-wrap item-center gap-1"
     const headstyle = "text-xl font-semibold text-gray-700"
     const contentstyle = "text-lg"
+    const img = user.image.substring(0, 8);
+
     return (
         <div className="flex justify-center w-full" style={{
             alignItems: "center",
@@ -16,7 +18,7 @@ const UserDetails = () => {
              style={{
                  alignItems: 'center',
              }}>
-                <img src={user.image} className='bg-black rounded-full'
+                <img src={img} className='bg-black rounded-full'
                     style={{
                         // width: '200px',
                         height: '100%',
