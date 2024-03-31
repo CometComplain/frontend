@@ -106,6 +106,7 @@ const ComplaintForm = () => {
         // console.log(formData, file);
         const complaint = formatAsaRequest(formData);
         await dataMutation.mutateAsync([complaint, file]);
+        event.target.reset();
     };
 
     const today = getDate();
