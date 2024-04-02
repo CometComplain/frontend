@@ -14,7 +14,7 @@ const Login = () => {
         <div className={styles.container}>
             <div className={styles.loginBox}>
                 <div className={styles.logoContainer}>
-                    <img src={'/public/assests/IIIT-Kottayam.png'} alt="Logo" className={styles.logo} />
+                    <img src={'assests/IIIT-Kottayam.png'} alt="Logo" className={styles.logo} />
                 </div>
                 <h1>Welcome Back</h1>
                 <p>Sign in to continue</p>

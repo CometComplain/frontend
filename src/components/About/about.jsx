@@ -3,22 +3,22 @@ import styles from "./styles.module.css";
 
 const features = [
     {
-        heading: "/public/assests/sub2.0.png",
+        heading: "assests/sub2.0.png",
         content:
             "At Campus Concerns, we've streamlined our complaint submission process for effortless and efficient reporting.",
     },
     {
-        heading: "/public/assests/processtran2.0.png",
+        heading: "assests/processtran2.0.png",
         content:
             "Our system offers a transparent complaint management process, providing students with real-time updates.",
     },
     {
-        heading: "/public/assests/statustrack2.0.0.png",
+        heading: "assests/statustrack2.0.0.png",
         content:
             "Track the progress of your tasks effortlessly with our intuitive status tracking feature with real time updates.",
     },
     {
-        heading: "/public/assests/docver2.0.png",
+        heading: "assests/docver2.0.png",
         content:
             "We prioritize the integrity of information and take proactive measures to verify documents and prevent spam submissions.",
     },

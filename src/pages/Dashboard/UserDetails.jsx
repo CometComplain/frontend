@@ -8,7 +8,7 @@ const UserDetails = () => {
     const HeadDivStyle = "flex flex-wrap item-center gap-1"
     const headstyle = "text-xl font-semibold text-gray-700"
     const contentstyle = "text-lg"
-    const img = user.image.substring(0, 8);
+    const img = user.image;
 
     return (
         <div className="flex justify-center w-full" style={{

@@ -27,26 +27,26 @@ const Contact = () => {
                         <div className="text-xl font-semibold ">Social Media:</div>
                         <div className="flex flex-row gap-3 ">
                             <a href="">
-                            <img src="/public/assests/SVGS/facebook.svg" height={35} width={35} />
+                            <img src="assests/SVGS/facebook.svg" height={35} width={35} />
                             </a>
                             <div className="border border-gray-500 " ></div>
                             <a href="">
-                            <img src="/public/assests/SVGS/instragram.svg" height={35} width={35} />
+                            <img src="assests/SVGS/instragram.svg" height={35} width={35} />
                             </a>
                             <div className="border border-gray-500 " ></div>
                             <a href="">
-                            <img src="/public/assests/SVGS/linkedan.svg" height={35} width={35} />
+                            <img src="assests/SVGS/linkedan.svg" height={35} width={35} />
                             </a>
                             <div className="border border-gray-500 " ></div>
                             <a href="">
-                            <img src="/public/assests/SVGS/twitter.svg" height={35} width={35} />
+                            <img src="assests/SVGS/twitter.svg" height={35} width={35} />
                             </a>
 
                         </div>
                     </div>
                 </div>
                 <div>
-                    <img src={'/public/assests/IIIT-Kottayam.png'} alt="Logo" height={250} width={250}
+                    <img src={'assests/IIIT-Kottayam.png'} alt="Logo" height={250} width={250}
                         style={{
                             backgroundBlendMode: "multiply",
                         }}

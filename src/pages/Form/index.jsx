@@ -9,7 +9,6 @@ import InputCard from "@components/ui/InputCard.jsx";
 
 
 const sendData = async ([complaintData, file]) => {
-    // console.log(complaintData, file);
     if (!complaintData || !file) throw new Error('Not a well structured form');
 
     const formData = new FormData();
@@ -79,6 +78,31 @@ const selectCSS = "py-2 pl-2 pr-6 text-base border border-gray-400 rounded shado
 
 
 
+const clearForm = (event) => {
+    const form = event.target;
+    form.mobile.value = '';
+
+    form.title.value = '';
+    form.description.value = '';
+    form.type.value = '';
+
+    form.building.value = '';
+    form.roomNo.value = ' ';
+    form.floorNo.value = ' ';
+    
+    form.proof.value = ''; 
+}
+
+const checkPrerequsets = (event) => {
+    const num = event.target.mobile.value;
+    if(num.length !== 10 || isNaN(num)) {
+        toast.error('Enter a valid mobile number');
+        event.preventDefault();
+        return false;
+    }
+    return true;
+}
+
 const ComplaintForm = () => {
     const {user} = useUser();
     if(user === null) {
@@ -100,23 +124,36 @@ const ComplaintForm = () => {
         onError
     });
 
+    // const handleSubmit = async (event) => {
+    //     event.preventDefault();
+    //     const [formData, file] = getFormData(event);
+    //     // console.log(formData, file);
+    //     const complaint = formatAsaRequest(formData);
+    //     try {
+    //         await dataMutation.mutateAsync([complaint, file]);
+    //     } catch (err) {}
+    //     document.querySelector('form').reset();
+    //     console.log('resetted');
+    // };
+
     const handleSubmit = async (event) => {
         event.preventDefault();
+        if(!checkPrerequsets(event)) return;
         const [formData, file] = getFormData(event);
-        // console.log(formData, file);
         const complaint = formatAsaRequest(formData);
-        await dataMutation.mutateAsync([complaint, file]);
-        event.target.reset();
+        try {
+            await dataMutation.mutateAsync([complaint, file]);
+        } catch (err) {}
+        clearForm(event);
     };
 
-    const today = getDate();
 
     return (
         <div className='flex flex-col'>
             <div className="self-center m-5 text-3xl font-bold text-zinc-800">
                 Register Your Complaint
             </div>
-            <form action='' className='flex flex-col' onSubmit={handleSubmit}>
+            <form action='' id='complaint-form' className='flex flex-col' onSubmit={handleSubmit}>
                 {/* Personal Details */}
                 <div className={Card}>
                     <div className={heading}>Personal Details</div>
@@ -143,7 +180,7 @@ const ComplaintForm = () => {
                         <div className="flex flex-row flex-wrap gap-10">
                             <div className='flex flex-col gap-2'>
                                 <label htmlFor='complianttype' className='text-base font-medium'>Selcet
-                                    Compliant <span className='text-red-600'>*</span></label>
+                                    Compliant <Cc:noie></Cc:noie>ategory <span className='text-red-600'>*</span></label>
                                 <select name="type" className={selectCSS}>
                                     {Object.keys(complaintTypes).map((type, index) => {
                                         return <option key={index}
@@ -171,7 +208,7 @@ const ComplaintForm = () => {
                     <div className="flex flex-col gap-5 p-5">
                         <div className="flex flex-row flex-wrap gap-10">
                             <div className="flex flex-col gap-2">
-                                <label htmlFor='BuildingName' className='text-base font-medium'>Selcet Complaint <span
+                                <label htmlFor='BuildingName' className='text-base font-medium'>Selcet location <span
                                     className='text-red-600'>*</span></label>
                                 <select name="building" className={selectCSS} required>
                                     {

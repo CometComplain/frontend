@@ -26,11 +26,11 @@ const routes = [
         component: "Tables",
         icon: tables
     },
-    {
-        title: "Statistics",
-        component: "Statistics",
-        icon: statistics
-    }
+    // {
+    //     title: "Statistics",
+    //     component: "Statistics",
+    //     icon: statistics
+    // }
 ];
 
 
