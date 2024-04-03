@@ -34,7 +34,7 @@ const Navbar = ({auLinks = [], unAuLinks = [], subs = {}}) => {
             <nav className={`${styles.navbar} header`}>
                 <div className={styles.logo_menu_wrapper}>
                     <div className={styles.navbar__logo}>
-                        <img src="/assests/logo.png" alt="Logo" onClick={() => {
+                        <img src="/assests/logo.png" alt="Logo" className='cursor-pointer' onClick={() => {
                             navigate(apiRoutes.home);
                         }}  width={130}/>
                     </div>
