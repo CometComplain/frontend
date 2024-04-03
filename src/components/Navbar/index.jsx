@@ -34,7 +34,9 @@ const Navbar = ({auLinks = [], unAuLinks = [], subs = {}}) => {
             <nav className={`${styles.navbar} header`}>
                 <div className={styles.logo_menu_wrapper}>
                     <div className={styles.navbar__logo}>
-                        <img src="/assests/logo.png" alt="Logo"  width={130}/>
+                        <img src="/assests/logo.png" alt="Logo" onClick={() => {
+                            navigate(apiRoutes.home);
+                        }}  width={130}/>
                     </div>
                     <span className={styles.menu_icon} onClick={toggleDropdown}>
                     {isDropdownOpen ? '✖' : '☰'}
