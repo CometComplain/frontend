@@ -96,38 +96,23 @@ export const pages = {
 export const backendUrl = "http://localhost:5000";
 
 export const apiRoutes = {
-    registerComplaint: "/api/grievance/register",
-    createUser: "/api/grievance/auth/createUser",
-    getComplaints: "/api/grievance/complaints",
-    getComplaintWithId: "/api/grievance/complaint",
-    deleteComplaint: "/api/grievance/delete",
-    uploadProof: "/api/grievance/upload",
-    verifyComplaint: "/api/grievance/verify",
-    rejectComplaint: "/api/grievance/reject",
-    acceptComplaint: "/api/grievance/accept",
-    solveComplaint: "/api/grievance/solve",
-    getUser: "/api/grievance/auth/pinguser",
-    getUsers: "/api/grievance/auth/users",
-    getComplaintCounts: '/api/grievance/complaintcount',
+    registerComplaint: `${backendUrl}/grievance/register`,
+    createUser: `${backendUrl}/grievance/auth/createUser`,
+    getComplaints: `${backendUrl}/grievance/complaints`,
+    getComplaintWithId: `${backendUrl}/grievance/complaint`,
+    deleteComplaint: `${backendUrl}/grievance/delete`,
+    uploadProof: `${backendUrl}/grievance/upload`,
+    verifyComplaint: `${backendUrl}/grievance/verify`,
+    rejectComplaint: `${backendUrl}/grievance/reject`,
+    acceptComplaint: `${backendUrl}/grievance/accept`,
+    solveComplaint: `${backendUrl}/grievance/solve`,
+    getUser: `${backendUrl}/grievance/auth/pinguser`,
+    getUsers: `${backendUrl}/grievance/auth/users`,
+    getComplaintCounts: `${backendUrl}/grievance/complaintcount`,
     backendUrl,
-    // login:`${backendUrl}/api/v1/auth/google`,
     login: `${backendUrl}/grievance/auth/google`,
-    // deleteComplaint: '/api/complaints/delete',
 };
 
-// export const apiRoutes = {
-//     registerComplaint: "/api/register",
-//     getComplaints: "/api/complaints",
-//     getComplaintWithId: "/api/complaint",
-//     uploadProof: "/api/upload",
-//     verifyComplaint: "/api/complaints/verify",
-//     acceptComplaint: "/api/complaints/accept",
-//     getUser: "/api/auth/login/success",
-//     backendUrl,
-//     // login:`${backendUrl}/api/v1/auth/google`,
-//     login: `${backendUrl}/auth/google`,
-//     // deleteComplaint: '/api/complaints/delete',
-// };
 
 export const customAxios = axios.create({
     withCredentials: true,
