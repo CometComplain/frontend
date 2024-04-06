@@ -93,7 +93,7 @@ export const pages = {
     complaint: "/user/complaint",
 };
 
-export const backendUrl = "https://frontend-vf9u.onrender.com/";
+export const backendUrl = "https://backend-i1lr.onrender.com";
 
 export const apiRoutes = {
     registerComplaint: `${backendUrl}/grievance/register`,
