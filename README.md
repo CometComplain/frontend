@@ -30,3 +30,7 @@ To run the CMS frontend locally, follow these steps:
 ## Configuration
 
 Before running the frontend, make sure to configure the API [backend of this project](https://github.com/CometComplain/backend) endpoint in the `.env` file:
+
+## SRS and other Documents 
+
+If you want to review our project, please go to the "Project Information" folder located in the frontend repository.
