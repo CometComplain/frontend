@@ -106,6 +106,7 @@ const userMap = {
     [UserTypes.Complainant]: Complainant,
     [UserTypes.Technician]: Technician,
     [UserTypes.Verifier]: Verifier,
+    [UserTypes.Admin] : Complainant,
 }
 
 const firstRow = "text-base font-medium text-gray-600";
@@ -128,6 +129,7 @@ const Complaint = () => {
     if (isError) return <div>Error Fetching Data</div>
 
     const {complaint, acceptedBy, createdBy} = data;
+    // alert(user.role);
     const Component = userMap[user.role];
     // console.log(data);
 
@@ -159,7 +161,7 @@ const Complaint = () => {
                                         <div><span
                                             className={firstRow}>Building Name:</span> {reverseBuildingsMap[complaint.location.buildingName]}
                                         </div>
-                                        {complaint.location.roomNo && <div><span
+                                        {(complaint.location.roomNo /* && confirm('Enter anything') */) && <div><span
                                             className={firstRow}>Room No:</span> {complaint.location.roomNo}</div>}
                                         {complaint.location.floorNo && <div><span
                                             className={firstRow}>Floor NO:</span> {complaint.location.floorNo}

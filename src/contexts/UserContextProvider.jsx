@@ -2,20 +2,19 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { apiRoutes, customAxios, UserTypes } from "@/constants.js";
-import {toast} from "sonner";
-import {useQuery} from "@tanstack/react-query";
+import { toast } from "sonner";
+import { useQuery } from "@tanstack/react-query";
 
 export const userContext = createContext({
     user: null,
     setUser: () => {},
 });
 
-
 const tempUser = {
-    displayName: 'Admin',
-    email: 'Admin@admin.com',
+    displayName: "Admin",
+    email: "Admin@admin.com",
     role: UserTypes.Admin,
-}
+};
 
 export const UserContextProvider = ({ children }) => {
     const [user, setUser] = useState(null);
@@ -24,19 +23,19 @@ export const UserContextProvider = ({ children }) => {
     const userQuery = useQuery({
         queryFn: async () => {
             const response = await customAxios.get(apiRoutes.getUser);
-            return response.data
+            return response.data;
         },
-        queryKey: ['user'],
+        queryKey: ["user"],
     });
 
-    const {data, isError} = userQuery;
+    const { data, isError } = userQuery;
     useEffect(() => {
         if (isError) {
             setRequested(true);
             // setUser(tempUser); //temporary
         }
         if (data) {
-            setUser(prevData => data);
+            setUser((prevData) => data);
             // console.log(data);
             setRequested(true);
         }
