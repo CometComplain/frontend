@@ -35,7 +35,7 @@ export const UserContextProvider = ({ children }) => {
             // setUser(tempUser); //temporary
         }
         if (data) {
-            setUser((prevData) => data);
+            setUser(() => data);
             // console.log(data);
             setRequested(true);
         }

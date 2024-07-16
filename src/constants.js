@@ -8,10 +8,10 @@ export const UserTypes = {
     Admin: 3,
 };
 export const reverseUserTypes = {
-    [0] : "Complainant",
-    [1] : "Verifier",
-    [2] : "Technician",
-    [3] : "Admin",
+    [0]: "Complainant",
+    [1]: "Verifier",
+    [2]: "Technician",
+    [3]: "Admin",
 };
 
 export const statusMap = {
@@ -28,7 +28,7 @@ export const reverseStatusMap = {
     2: "Accepted",
     3: "Solved",
     4: "Rejected",
-}
+};
 
 export const Headers = {
     UserType: "type",
@@ -37,22 +37,22 @@ export const Headers = {
     UserUName: "u_name",
 };
 
-export const complaintTypes =  {
+export const complaintTypes = {
     Electrical: 0,
     Plumbing: 1,
     IT: 2,
     Others: 3,
 };
 
-export const reverseComplaintTypes =  {
-    [0]: 'Electrical',
-    [1]: 'plumbing',
-    [2]: 'IT',
-    [3]: 'Others',
+export const reverseComplaintTypes = {
+    [0]: "Electrical",
+    [1]: "plumbing",
+    [2]: "IT",
+    [3]: "Others",
 };
 
 export const buildingsMap = {
-    "Mess": 0,
+    Mess: 0,
     "Admin Block": 1,
     "Academic Block": 2,
     "new Academic Block": 3,
@@ -61,7 +61,7 @@ export const buildingsMap = {
     "Manimala Hostel": 6,
     "Annaimudi Hostel": 7,
     "Anna residency": 8,
-}
+};
 export const reverseBuildingsMap = {
     [0]: "Mess",
     [1]: "Admin Block",
@@ -72,7 +72,7 @@ export const reverseBuildingsMap = {
     [6]: "Manimala Hostel",
     [7]: "Annaimudi Hostel",
     [8]: "Anna residency",
-}
+};
 
 export const pages = {
     login: "/login",
@@ -93,22 +93,42 @@ export const pages = {
     complaint: "/user/complaint",
 };
 
-export const backendUrl = "http://localhost:5000";
+export const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
+// export const apiRoutes = {
+//     registerComplaint: "/api/grievance/register",
+//     createUser: "/api/grievance/auth/createUser",
+//     getComplaints: "/api/grievance/complaints",
+//     getComplaintWithId: "/api/grievance/complaint",
+//     deleteComplaint: "/api/grievance/delete",
+//     uploadProof: "/api/grievance/upload",
+//     verifyComplaint: "/api/grievance/verify",
+//     rejectComplaint: "/api/grievance/reject",
+//     acceptComplaint: "/api/grievance/accept",
+//     solveComplaint: "/api/grievance/solve",
+//     getUser: "/api/grievance/auth/pinguser",
+//     getUsers: "/api/grievance/auth/users",
+//     getComplaintCounts: '/api/grievance/complaintcount',
+//     backendUrl,
+//     // login:`${backendUrl}/api/v1/auth/google`,
+//     login: `${backendUrl}/grievance/auth/google`,
+//     // deleteComplaint: '/api/complaints/delete',
+// };
 
 export const apiRoutes = {
-    registerComplaint: "/api/grievance/register",
-    createUser: "/api/grievance/auth/createUser",
-    getComplaints: "/api/grievance/complaints",
-    getComplaintWithId: "/api/grievance/complaint",
-    deleteComplaint: "/api/grievance/delete",
-    uploadProof: "/api/grievance/upload",
-    verifyComplaint: "/api/grievance/verify",
-    rejectComplaint: "/api/grievance/reject",
-    acceptComplaint: "/api/grievance/accept",
-    solveComplaint: "/api/grievance/solve",
-    getUser: "/api/grievance/auth/pinguser",
-    getUsers: "/api/grievance/auth/users",
-    getComplaintCounts: '/api/grievance/complaintcount',
+    registerComplaint: `${backendUrl}/grievance/register`,
+    createUser: `${backendUrl}/grievance/auth/createUser`,
+    getComplaints: `${backendUrl}/grievance/complaints`,
+    getComplaintWithId: `${backendUrl}/grievance/complaint`,
+    deleteComplaint: `${backendUrl}/grievance/delete`,
+    uploadProof: `${backendUrl}/grievance/upload`,
+    verifyComplaint: `${backendUrl}/grievance/verify`,
+    rejectComplaint: `${backendUrl}/grievance/reject`,
+    acceptComplaint: `${backendUrl}/grievance/accept`,
+    solveComplaint: `${backendUrl}/grievance/solve`,
+    getUser: `${backendUrl}/grievance/auth/pinguser`,
+    getUsers: `${backendUrl}/grievance/auth/users`,
+    getComplaintCounts: `${backendUrl}/grievance/complaintcount`,
     backendUrl,
     // login:`${backendUrl}/api/v1/auth/google`,
     login: `${backendUrl}/grievance/auth/google`,
@@ -156,7 +176,7 @@ const userSpecificLinks = [
         name: "Register Complaint",
         path: "/user/complaint-register",
     },
-]
+];
 export const auLinks = {
     [UserTypes.Complainant]: [...verTechLinks, ...userSpecificLinks],
     [UserTypes.Verifier]: verTechLinks,
@@ -178,12 +198,16 @@ export const statusStylesMap = {
     [statusMap.Verified]: "rounded-md px-2 bg-orange-100 text-red-700",
     [statusMap.Accepted]: "rounded-md px-2 bg-blue-200 text-blue-700",
     [statusMap.Solved]: "rounded-md px-2 bg-green-200 text-black",
-    [statusMap.Rejected]: 'rounded-md px-2 bg-red-200 text-gray-700',
-}
+    [statusMap.Rejected]: "rounded-md px-2 bg-red-200 text-gray-700",
+};
 
-
-export const selectOptions = [{
-    value: -1, name: 'All',
-}, ...Object.entries(reverseStatusMap).map(([key, value]) => ({
-    value: key, name: value,
-}))]
+export const selectOptions = [
+    {
+        value: -1,
+        name: "All",
+    },
+    ...Object.entries(reverseStatusMap).map(([key, value]) => ({
+        value: key,
+        name: value,
+    })),
+];

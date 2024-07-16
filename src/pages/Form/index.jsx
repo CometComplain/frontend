@@ -1,5 +1,6 @@
 import styles from "./styles.module.css";
 import form from "@pages/Form/index.jsx";
+import React from "react";
 import { useMutation } from "@tanstack/react-query";
 import { getDate, onError } from "@/utils/index.js";
 import {
@@ -113,10 +114,6 @@ const checkPrerequsets = (event) => {
 };
 
 const ComplaintForm = () => {
-    const { user } = useUser();
-    if (user === null) {
-        return <></>;
-    }
     // const fileMutation = useMutation({
     //     mutationFn: sendFile,
     //     onSuccess: (responseData) => {
@@ -127,12 +124,16 @@ const ComplaintForm = () => {
 
     const dataMutation = useMutation({
         mutationFn: sendData,
-        onSuccess: (responseData) => {
+        onSuccess: () => {
             toast.success("Registered complaint successfully");
         },
         onError,
     });
 
+    const { user } = useUser();
+    if (user === null) {
+        return <></>;
+    }
     // const handleSubmit = async (event) => {
     //     event.preventDefault();
     //     const [formData, file] = getFormData(event);
@@ -219,7 +220,7 @@ const ComplaintForm = () => {
                                     htmlFor="complianttype"
                                     className="text-base font-medium"
                                 >
-                                    Selcet Compliant <Cc:noie></Cc:noie>ategory{" "}
+                                    Selcet Compliant category{" "}
                                     <span className="text-red-600">*</span>
                                 </label>
                                 <select name="type" className={selectCSS}>
@@ -355,4 +356,3 @@ const ComplaintForm = () => {
 };
 
 export default ComplaintForm;
-
