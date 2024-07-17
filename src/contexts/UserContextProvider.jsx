@@ -26,6 +26,7 @@ export const UserContextProvider = ({ children }) => {
             return response.data;
         },
         queryKey: ["user"],
+        retry: 1,
     });
 
     const { data, isError } = userQuery;
